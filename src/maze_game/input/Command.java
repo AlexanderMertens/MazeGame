@@ -1,3 +1,5 @@
+package maze_game.input;
+
 /**
  * 
  */

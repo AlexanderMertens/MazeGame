@@ -1,3 +1,5 @@
+package maze_game.directions;
+
 /**
  * Enumeration that represent the four cardinal directions. These objects
  * represent the directions a given room can have an exit to.

@@ -1,4 +1,8 @@
+package maze_game.gameobjects;
+
 import java.util.HashMap;
+
+import maze_game.directions.Direction;
 
 /**
  * The Room class models a GameObject that represents a single room in the maze.

@@ -1,3 +1,5 @@
+package maze_game.input;
+
 /**
  * Enumeration class CommandWord models a command input from the user. The class
  * contains a field commandString representing the command.

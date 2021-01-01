@@ -1,3 +1,5 @@
+package maze_game.gameobjects;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

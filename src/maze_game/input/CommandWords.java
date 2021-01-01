@@ -1,3 +1,5 @@
+package maze_game.input;
+
 import java.util.HashMap;
 
 /**

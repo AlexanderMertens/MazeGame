@@ -1,3 +1,5 @@
+package maze_game.gameobjects;
+
 /**
  * GameObject class respresents all objects in the Maze game.
  * 

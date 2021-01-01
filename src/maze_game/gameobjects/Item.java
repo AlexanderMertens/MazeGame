@@ -1,3 +1,5 @@
+package maze_game.gameobjects;
+
 public class Item extends GameObject {
     private double weight;
 

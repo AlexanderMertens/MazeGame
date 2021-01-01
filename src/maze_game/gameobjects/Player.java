@@ -1,4 +1,8 @@
+package maze_game.gameobjects;
+
 import java.util.Stack;
+
+import maze_game.directions.Direction;
 
 /**
  * This class represents the player of maze game.
