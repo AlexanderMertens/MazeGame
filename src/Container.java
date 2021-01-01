@@ -75,10 +75,30 @@ public abstract class Container extends GameObject {
      * adds it to the other container.
      * 
      * @param other    Container object to which the item is given to.
-     * @param itemName The name of the
+     * @param itemName The name of the item to be exchanged.
+     * 
+     * @return Returns true if this container contains the item.
      */
-    public void giveItemTo(Container other, String itemName) {
+    public boolean giveItemTo(Container other, String itemName) {
         Item item = removeItem(itemName);
-        other.addItem(item);
+        if (item != null) {
+            other.addItem(item);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Removes Item object in the inventory of other Container corresponding to the
+     * given itemName and adds it to the this container.
+     * 
+     * @param other    Container object from which the item is taken.
+     * @param itemName The name of the item to be exchanged.
+     * 
+     * @return Returns true if the other container contains the item.
+     */
+    public boolean takeItemFrom(Container other, String itemName) {
+        return other.giveItemTo(this, itemName);
     }
 }
