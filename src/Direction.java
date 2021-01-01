@@ -1,6 +1,8 @@
 /**
  * Enumeration that represent the four cardinal directions. These objects
  * represent the directions a given room can have an exit to.
+ * 
+ * @author Alexander Mertens
  */
 public enum Direction {
     NORTH("north"), WEST("west"), EAST("east"), SOUTH("south");

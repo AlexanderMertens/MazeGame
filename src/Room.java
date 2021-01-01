@@ -7,6 +7,8 @@ import java.util.HashMap;
  * and other instances of Room as values. The class implements methods to set an
  * exit in a certain direction or retrieve a room that is located in a direction
  * with respect to this room.
+ * 
+ * @author Alexander Mertens
  */
 public class Room extends Container {
     private HashMap<Direction, Room> exits;

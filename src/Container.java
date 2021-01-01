@@ -8,6 +8,8 @@ import java.util.Iterator;
  * character and other characters.
  * 
  * This class implements methods to add, remove, retrieve and exchange items.
+ * 
+ * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
     private ArrayList<Item> inventory;
