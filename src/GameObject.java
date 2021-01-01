@@ -6,7 +6,7 @@
  * 
  * @author Alexander Mertens
  */
-public class GameObject {
+public abstract class GameObject {
     private String name;
     private String description;
 
