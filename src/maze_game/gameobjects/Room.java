@@ -49,4 +49,12 @@ public class Room extends Container {
     public Room getExit(Direction direction) {
         return exits.get(direction);
     }
+
+    public String getRoomString() {
+        String result = "You are in " + getName() + ".\n" + getInventoryString() + "\n The exits are: ";
+        for (Direction direction : exits.keySet()) {
+            result += "  " + direction.toString();
+        }
+        return result;
+    }
 }

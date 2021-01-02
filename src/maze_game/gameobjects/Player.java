@@ -93,7 +93,7 @@ public class Player extends Container {
     }
 
     private String getLocationDescription() {
-        return getLocation().getDescription();
+        return getLocation().getRoomString();
     }
 
     private void setCurrentRoom(Room newRoom) {

@@ -7,7 +7,7 @@ package maze_game.directions;
  * @author Alexander Mertens
  */
 public enum Direction {
-    NORTH("north"), WEST("west"), EAST("east"), SOUTH("south");
+    NORTH("north"), WEST("west"), EAST("east"), SOUTH("south"), UNKNOWN("?");
 
     private String directionString;
 
@@ -19,6 +19,14 @@ public enum Direction {
      */
     Direction(String directionString) {
         this.directionString = directionString;
+    }
+
+    public static Direction convertString(String directionInput) {
+        try {
+            return Direction.valueOf(directionInput.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return Direction.UNKNOWN;
+        }
     }
 
     public String toString() {
