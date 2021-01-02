@@ -71,7 +71,36 @@ public class Player extends Container {
         }
     }
 
+    public boolean take(String itemName) {
+        return takeItemFrom(getLocation(), itemName);
+    }
+
+    public boolean drop(String itemName) {
+        return giveItemTo(getLocation(), itemName);
+    }
+
+    public String getLongDescription() {
+        return getLocationDescription() + "\n" + "\nThe " + getLocationName() + " contains:\n" + getLocationInventory()
+                + "\nThe player's bag contains: \n" + this.getInventoryString();
+    }
+
+    private String getLocationName() {
+        return getLocation().getName();
+    }
+
+    private String getLocationInventory() {
+        return getLocation().getInventoryString();
+    }
+
+    private String getLocationDescription() {
+        return getLocation().getDescription();
+    }
+
     private void setCurrentRoom(Room newRoom) {
         this.currentRoom = newRoom;
+    }
+
+    private Room getLocation() {
+        return currentRoom;
     }
 }

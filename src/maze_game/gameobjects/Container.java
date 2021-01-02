@@ -103,4 +103,12 @@ public abstract class Container extends GameObject {
     public boolean takeItemFrom(Container other, String itemName) {
         return other.giveItemTo(this, itemName);
     }
+
+    public String getInventoryString() {
+        String result = "";
+        for (Item item : inventory) {
+            result += "  " + item.getName() + " has weight of " + item.getWeight();
+        }
+        return result;
+    }
 }
