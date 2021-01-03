@@ -25,7 +25,7 @@ public class CommandWords {
      * @return Returns true if the given String is a valid command, false if it
      *         isn't.
      */
-    public boolean isCommand(String potentialCommand) {
+    public boolean isCommandWord(String potentialCommand) {
         return (commands.containsKey(potentialCommand));
     }
 
@@ -48,8 +48,8 @@ public class CommandWords {
      * 
      * @return CommandWord corresponding to the given command word String.
      */
-    public CommandWord getCommand(String potentialCommand) {
-        if (isCommand(potentialCommand)) {
+    public CommandWord getCommandWord(String potentialCommand) {
+        if (isCommandWord(potentialCommand)) {
             return commands.get(potentialCommand);
         } else {
             return CommandWord.UNKNOWN;
