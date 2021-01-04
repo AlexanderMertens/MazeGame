@@ -7,10 +7,11 @@ import maze_game.gameobjects.Room;
 import maze_game.commands.Command;
 import maze_game.input.CommandWord;
 import maze_game.input.Parser;
+import maze_game.state.GameState;
 
 public class Game {
     private Parser parser;
-    private Player player;
+    private GameState gameState;
 
     /**
      * Creates the game and initializes all the rooms and their contents;
@@ -50,7 +51,8 @@ public class Game {
         office.addItem(new Item("Desk", "", 52.5));
         office.addItem(new Item("Laptop", "", 15.3));
 
-        player = new Player("Alexander", "", outside);
+        Player player = new Player("Alexander", "");
+        gameState = new GameState(player, outside);
     }
 
     /**
@@ -65,7 +67,7 @@ public class Game {
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
-            finished = command.execute(player);
+            finished = command.execute(gameState);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -88,6 +90,6 @@ public class Game {
     }
 
     private void printLocationInfo() {
-        System.out.println(player.getLongDescription());
+        System.out.println(gameState.getStateDescription());
     }
 }

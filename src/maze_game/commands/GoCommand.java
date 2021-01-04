@@ -1,7 +1,7 @@
 package maze_game.commands;
 
 import maze_game.directions.Direction;
-import maze_game.gameobjects.Player;
+import maze_game.state.GameState;
 
 public class GoCommand extends Command {
 
@@ -9,19 +9,18 @@ public class GoCommand extends Command {
         super(argument);
     }
 
-    public boolean execute(Player player) {
+    public boolean execute(GameState gameState) {
         if (!hasArgument()) {
-            // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
             return false;
         }
 
         Direction direction = Direction.convertString(getArgument());
-        if (!player.go(direction)) {
+        if (!gameState.go(direction)) {
             System.out.println("There is no door!");
             return false;
         }
-        System.out.println(player.getLongDescription());
+        System.out.println(gameState.getStateDescription());
         return false;
     }
 }

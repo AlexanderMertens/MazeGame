@@ -1,6 +1,6 @@
 package maze_game.commands;
 
-import maze_game.gameobjects.Player;
+import maze_game.state.GameState;
 
 /**
  * 
@@ -26,10 +26,6 @@ public abstract class Command {
         return argument;
     }
 
-    public boolean isUnknown() {
-        return false;
-    }
-
     /**
      * @return true if the command has a second word.
      */
@@ -43,5 +39,5 @@ public abstract class Command {
      * @param player Player of the game.
      * @return Returns true if the game should terminate.
      */
-    public abstract boolean execute(Player player);
+    public abstract boolean execute(GameState gameState);
 }

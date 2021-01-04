@@ -1,27 +1,23 @@
 package maze_game.commands;
 
-import maze_game.gameobjects.Player;
+import maze_game.state.GameState;
 
 public class DropCommand extends Command {
     public DropCommand(String argument) {
         super(argument);
     }
 
-    public boolean isUnknown() {
-        return false;
-    }
-
-    public boolean execute(Player player) {
+    public boolean execute(GameState gameState) {
         if (!hasArgument()) {
             System.out.println("Drop what?");
             return false;
         }
         String itemName = getArgument();
-        if (!player.drop(itemName)) {
+        if (!gameState.playerDrops(itemName)) {
             System.out.println("You don't have item " + itemName + "!");
             return false;
         }
-        System.out.println(player.getLongDescription());
+        System.out.println(gameState.getStateDescription());
         return false;
     }
 }

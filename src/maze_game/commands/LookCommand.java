@@ -1,6 +1,6 @@
 package maze_game.commands;
 
-import maze_game.gameobjects.Player;
+import maze_game.state.GameState;
 
 public class LookCommand extends Command {
 
@@ -8,8 +8,8 @@ public class LookCommand extends Command {
         super(argument);
     }
 
-    public boolean execute(Player player) {
-        System.out.println(player.getLongDescription());
+    public boolean execute(GameState gameState) {
+        System.out.println(gameState.getStateDescription());
         return false;
     }
 

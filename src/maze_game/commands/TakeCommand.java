@@ -1,22 +1,22 @@
 package maze_game.commands;
 
-import maze_game.gameobjects.Player;
+import maze_game.state.GameState;
 
 public class TakeCommand extends Command {
     public TakeCommand(String argument) {
         super(argument);
     }
 
-    public boolean execute(Player player) {
+    public boolean execute(GameState gameState) {
         if (!hasArgument()) {
             System.out.println("Take what?");
             return false;
         }
         String itemName = getArgument();
-        if (!player.take(itemName)) {
+        if (!gameState.playerTakes(itemName)) {
             System.out.println("There is no item here with the name " + itemName);
         }
-        System.out.println(player.getLongDescription());
+        System.out.println(gameState.getStateDescription());
         return false;
     }
 }
