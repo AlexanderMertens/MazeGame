@@ -3,6 +3,10 @@ package maze_game.commands;
 import maze_game.directions.Direction;
 import maze_game.state.GameState;
 
+/**
+ * Command that when executed instructs the gameState to move the player in a
+ * given direction.
+ */
 public class GoCommand extends Command {
 
     public GoCommand(String argument) {

@@ -3,6 +3,9 @@ package maze_game.commands;
 import maze_game.input.CommandWord;
 import maze_game.state.GameState;
 
+/**
+ * Command that when executed prints instructions for the game.
+ */
 public class HelpCommand extends Command {
     String commandWords;
 

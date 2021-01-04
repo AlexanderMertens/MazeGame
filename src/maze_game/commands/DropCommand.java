@@ -2,6 +2,10 @@ package maze_game.commands;
 
 import maze_game.state.GameState;
 
+/**
+ * Command that when executed instructs gameState to remove an item from the
+ * player's inventory and into the room.
+ */
 public class DropCommand extends Command {
     public DropCommand(String argument) {
         super(argument);

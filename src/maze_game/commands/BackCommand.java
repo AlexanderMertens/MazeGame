@@ -2,6 +2,10 @@ package maze_game.commands;
 
 import maze_game.state.GameState;
 
+/**
+ * Command that when executed instructs gameState to move the player back to the
+ * previous room.
+ */
 public class BackCommand extends Command {
     public BackCommand(String argument) {
         super(argument);
