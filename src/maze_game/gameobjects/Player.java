@@ -24,4 +24,9 @@ public class Player extends Container {
     public Player(String name, String description) {
         super(name, description);
     }
+
+    public String getInventoryString() {
+        return getName() + " inventory:" + super.getInventoryString();
+    }
+
 }

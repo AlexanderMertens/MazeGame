@@ -90,7 +90,12 @@ public class GameState {
      *         in, its contents and the contents of the player's inventory.
      */
     public String getStateDescription() {
-        return currentRoom.getRoomString();
+        String result = currentRoom.getRoomString() + "\n";
+        if (!player.isEmpty()) {
+            result += player.getInventoryString() + "\n";
+        }
+        result += currentRoom.getExitsString() + "\n";
+        return result;
     }
 
     private void setCurrentRoom(Room newRoom) {

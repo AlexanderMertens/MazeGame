@@ -104,10 +104,20 @@ public abstract class Container extends GameObject {
         return other.giveItemTo(this, itemName);
     }
 
+    /**
+     * @return Returns true when the Container is empty, false if not.
+     */
+    public boolean isEmpty() {
+        return inventory.isEmpty();
+    }
+
+    /**
+     * @return Returns a String representing the inventory of the GameObject.
+     */
     public String getInventoryString() {
         String result = "";
         for (Item item : inventory) {
-            result += "  " + item.getName() + " has weight of " + item.getWeight();
+            result += "  " + item.getName() + " has weight of " + item.getWeight() + "\n";
         }
         return result;
     }

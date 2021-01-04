@@ -50,8 +50,22 @@ public class Room extends Container {
         return exits.get(direction);
     }
 
+    /**
+     * @return Returns a String describing the room and its contents.
+     */
     public String getRoomString() {
-        String result = "You are in " + getName() + ".\n" + getInventoryString() + "\n The exits are: ";
+        String result = "You are in " + getName() + "\n" + getDescription();
+        if (!isEmpty()) {
+            result += "\n" + getInventoryString();
+        }
+        return result;
+    }
+
+    /**
+     * @return Returns a String with all the possible exits of the room.
+     */
+    public String getExitsString() {
+        String result = "There are exits in the directions:";
         for (Direction direction : exits.keySet()) {
             result += "  " + direction.toString();
         }
