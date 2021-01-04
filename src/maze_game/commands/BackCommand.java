@@ -11,6 +11,7 @@ public class BackCommand extends Command {
         super(argument);
     }
 
+    @Override
     public boolean execute(GameState gameState) {
         if (!gameState.goBack()) {
             System.out.println("You can't go back, you are already at the beginning!");

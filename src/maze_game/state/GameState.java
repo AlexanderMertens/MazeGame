@@ -3,7 +3,6 @@ package maze_game.state;
 import java.util.Stack;
 
 import maze_game.directions.Direction;
-import maze_game.gameobjects.GameObject;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 

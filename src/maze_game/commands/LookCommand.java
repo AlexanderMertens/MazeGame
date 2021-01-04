@@ -12,6 +12,7 @@ public class LookCommand extends Command {
         super(argument);
     }
 
+    @Override
     public boolean execute(GameState gameState) {
         if (hasArgument()) {
             System.out.println(gameState.findDescription(getArgument()));

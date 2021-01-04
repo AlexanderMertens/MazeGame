@@ -13,6 +13,7 @@ public class GoCommand extends Command {
         super(argument);
     }
 
+    @Override
     public boolean execute(GameState gameState) {
         if (!hasArgument()) {
             System.out.println("Go where?");

@@ -19,6 +19,7 @@ public class HelpCommand extends Command {
         }
     }
 
+    @Override
     public boolean execute(GameState gameState) {
         System.out.println("Your command words are: ");
         System.out.println(commandWords);

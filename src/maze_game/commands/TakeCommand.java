@@ -11,6 +11,7 @@ public class TakeCommand extends Command {
         super(argument);
     }
 
+    @Override
     public boolean execute(GameState gameState) {
         if (!hasArgument()) {
             System.out.println("Take what?");
