@@ -13,7 +13,11 @@ public class LookCommand extends Command {
     }
 
     public boolean execute(GameState gameState) {
-        System.out.println(gameState.getStateDescription());
+        if (hasArgument()) {
+            System.out.println(gameState.findDescription(getArgument()));
+        } else {
+            System.out.println(gameState.getStateDescription());
+        }
         return false;
     }
 

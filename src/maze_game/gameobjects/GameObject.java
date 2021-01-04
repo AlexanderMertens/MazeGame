@@ -34,6 +34,6 @@ public abstract class GameObject {
      * @return Returns a description of this object.
      */
     public String getDescription() {
-        return getName() + ": " + this.description;
+        return this.description;
     }
 }

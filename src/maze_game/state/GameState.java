@@ -3,6 +3,7 @@ package maze_game.state;
 import java.util.Stack;
 
 import maze_game.directions.Direction;
+import maze_game.gameobjects.GameObject;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 
@@ -96,6 +97,23 @@ public class GameState {
         }
         result += currentRoom.getExitsString() + "\n";
         return result;
+    }
+
+    /**
+     * Checks whether the given objectName is equal to any object's name in the
+     * current gameState. The method checks whether the given name is the room, the
+     * player or in the player or room's inventory. Returns null if there's no such
+     * object.
+     * 
+     * @param objectName Name of the object to be found.
+     * @return The description of the object with name objectName;
+     */
+    public String findDescription(String objectName) {
+        String description = player.findDescription(objectName);
+        if (description == null) {
+            description = currentRoom.findDescription(objectName);
+        }
+        return description;
     }
 
     private void setCurrentRoom(Room newRoom) {

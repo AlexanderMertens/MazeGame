@@ -25,8 +25,29 @@ public class Player extends Container {
         super(name, description);
     }
 
+    /**
+     * @return Returns a String representing the inventory of the player.
+     */
     public String getInventoryString() {
         return getName() + " inventory:" + super.getInventoryString();
+    }
+
+    /**
+     * Checks whether the given objectName is equal to this object's name or the
+     * String "player" and returns its description if it is. Otherwise the method
+     * tries to find an object with the given objectName in its inventory and return
+     * its description. If no object is found, the method returns null.
+     * 
+     * @param objectName Name of the object to be found.
+     * @return The description of the object with name objectName.
+     */
+    @Override
+    public String findDescription(String objectName) {
+        if (objectName.equals("player")) {
+            return getDescription();
+        } else {
+            return super.findDescription(objectName);
+        }
     }
 
 }
