@@ -1,6 +1,7 @@
 package maze_game.gameobjects;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import maze_game.directions.Direction;
 
@@ -15,7 +16,7 @@ import maze_game.directions.Direction;
  * @author Alexander Mertens
  */
 public class Room extends Container {
-    private HashMap<Direction, Door> exits;
+    private Map<Direction, Door> exits;
 
     /**
      * Constructs an empty room with no exits.

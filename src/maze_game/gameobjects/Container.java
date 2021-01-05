@@ -2,6 +2,7 @@ package maze_game.gameobjects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * The Container class models a GameObject that can contain items. It extends
@@ -14,7 +15,7 @@ import java.util.Iterator;
  * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
-    private ArrayList<Item> inventory;
+    private List<Item> inventory;
 
     /**
      * Constructs an empty container with given name and description.

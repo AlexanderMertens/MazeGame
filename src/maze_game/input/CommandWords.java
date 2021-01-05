@@ -1,6 +1,7 @@
 package maze_game.input;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The class CommandWords holds all the command words that can be used as input
@@ -8,7 +9,7 @@ import java.util.HashMap;
  * to CommandWord objects.
  */
 public class CommandWords {
-    private HashMap<String, CommandWord> commands;
+    private Map<String, CommandWord> commands;
 
     public CommandWords() {
         commands = new HashMap<>();
