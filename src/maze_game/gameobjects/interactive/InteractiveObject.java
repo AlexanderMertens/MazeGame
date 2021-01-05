@@ -1,4 +1,7 @@
-package maze_game.gameobjects;
+package maze_game.gameobjects.interactive;
+
+import maze_game.gameobjects.GameObject;
+import maze_game.state.GameState;
 
 /**
  * This class represents an object in the game world that the player can
@@ -39,28 +42,29 @@ public abstract class InteractiveObject extends GameObject {
     }
 
     /**
-     * Returns a String with the dialogue the character says. This can vary
-     * depending on whether the character has already met the player.
+     * @return Returns true if the player has already interacted with the object.
+     */
+    public boolean hasInteracted() {
+        return hasInteracted;
+    }
+
+    public void reset() {
+        this.hasInteracted = false;
+    }
+
+    /**
+     * Returns a String with the dialogue the object presents. This can vary
+     * depending on whether the player has already interacted with the object.
      * 
      * @return A String containing the appropriate dialogue.
      */
     public String getDialogue() {
-        if (hasMet) {
+        if (hasInteracted()) {
             return defaultDialogue;
         } else {
             return initialDialogue;
         }
     }
 
-    /**
-     * @return Returns true if the character has already met the player, else it
-     *         returns false.
-     */
-    public boolean hasMetPlayer() {
-        return hasMet;
-    }
-
-    public void meet() {
-        this.hasMet = true;
-    }
+    public abstract void interact(GameState gameState);
 }
