@@ -2,6 +2,11 @@ package maze_game.commands;
 
 import maze_game.input.CommandWord;
 
+/**
+ * This class creates Command objects from given commandWords and argument.
+ * 
+ * @author Alexander Mertens
+ */
 public class CommandFactory {
     public Command getCommand(CommandWord commandWord, String argument) {
         switch (commandWord) {

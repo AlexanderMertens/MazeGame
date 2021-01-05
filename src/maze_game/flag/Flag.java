@@ -3,6 +3,8 @@ package maze_game.flag;
 /**
  * This class represents messages send to the game engine, informing the engine
  * of succes or the way executing the command has failed.
+ * 
+ * @author Alexander Mertens
  */
 public enum Flag {
     // general

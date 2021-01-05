@@ -6,6 +6,8 @@ import maze_game.state.GameState;
 /**
  * Command that when executed instructs the gameState to move the player in a
  * given direction.
+ * 
+ * @author Alexander Mertens
  */
 public class GoCommand extends Command {
 

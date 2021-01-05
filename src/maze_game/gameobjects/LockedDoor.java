@@ -1,9 +1,25 @@
 package maze_game.gameobjects;
 
+/**
+ * This class represents a locked door. It holds a boolean locked that is true
+ * whenever the door is locked. It also holds an Item keyItem that can open the
+ * door.
+ * 
+ * @author Alexander Mertens
+ */
 public class LockedDoor extends Door {
     private Item keyItem;
     private boolean locked;
 
+    /**
+     * Constructs a LockedDoor with given name and description. At first the door is
+     * locked.
+     * 
+     * @param name        Name of the door.
+     * @param description Description of the door.
+     * @param room        The room the door leads to.
+     * @param keyItem     The item that can open the door.
+     */
     public LockedDoor(String name, String description, Room room, Item keyItem) {
         super(name, description, room);
         this.keyItem = keyItem;

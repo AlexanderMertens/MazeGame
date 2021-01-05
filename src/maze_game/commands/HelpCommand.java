@@ -5,6 +5,8 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed prints instructions for the game.
+ * 
+ * @author Alexander Mertens
  */
 public class HelpCommand extends Command {
     String commandWords;

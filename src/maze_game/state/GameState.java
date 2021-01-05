@@ -9,6 +9,13 @@ import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 
+/**
+ * Class that represents the current state of the gameworld. The class has
+ * fields that hold the room the current player is in, the history of previously
+ * visited rooms, the player object, a list of all rescued characters.
+ * 
+ * @author Alexander Mertens
+ */
 public class GameState {
     private Room currentRoom;
     private Stack<Room> previousRooms;

@@ -7,6 +7,8 @@ import java.util.Map;
  * The class CommandWords holds all the command words that can be used as input
  * in the Maze game. The class implements functionality to convert String input
  * to CommandWord objects.
+ * 
+ * @author Alexander Mertens
  */
 public class CommandWords {
     private Map<String, CommandWord> commands;

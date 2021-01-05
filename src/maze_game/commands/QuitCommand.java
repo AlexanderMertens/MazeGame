@@ -4,6 +4,8 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed sends a signal to the game instructing it to quit.
+ * 
+ * @author Alexander Mertens
  */
 public class QuitCommand extends Command {
     public QuitCommand(String argument) {

@@ -5,6 +5,8 @@ import maze_game.state.GameState;
 /**
  * Command that when executed instructs gameState to remove an item from the
  * room and put it in the player's inventory.
+ * 
+ * @author Alexander Mertens
  */
 public class TakeCommand extends Command {
     public TakeCommand(String argument) {
