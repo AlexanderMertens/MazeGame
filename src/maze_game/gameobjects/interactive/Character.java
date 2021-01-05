@@ -1,4 +1,4 @@
-package maze_game.gameobjects;
+package maze_game.gameobjects.interactive;
 
 /**
  * This class represents a character in the game world. A character has a string
@@ -7,7 +7,7 @@ package maze_game.gameobjects;
  * 
  * @author Alexander Mertens
  */
-public class Character extends GameObject {
+public class Character extends InteractiveObject {
     private String initialDialogue;
     private String defaultDialogue;
     // Records whether the character has met the player or not.
@@ -40,6 +40,14 @@ public class Character extends GameObject {
         } else {
             return initialDialogue;
         }
+    }
+
+    /**
+     * @return Returns true if the character has already met the player, else it
+     *         returns false.
+     */
+    public boolean hasMetPlayer() {
+        return hasMet;
     }
 
     public void meet() {
