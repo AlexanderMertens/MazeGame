@@ -1,8 +1,7 @@
 package maze_game.gameobjects;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The Container class models a GameObject that can contain items. It extends
@@ -15,7 +14,7 @@ import java.util.List;
  * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
-    private List<Item> inventory;
+    private Map<String, Item> inventory;
 
     /**
      * Constructs an empty container with given name and description.
@@ -25,7 +24,7 @@ public abstract class Container extends GameObject {
      */
     public Container(String name, String description) {
         super(name, description);
-        inventory = new ArrayList<>();
+        inventory = new HashMap<>();
     }
 
     /**
@@ -34,7 +33,7 @@ public abstract class Container extends GameObject {
      * @param item Item to be added.
      */
     public void addItem(Item item) {
-        inventory.add(item);
+        inventory.put(item.getName(), item);
     }
 
     /**
@@ -45,12 +44,7 @@ public abstract class Container extends GameObject {
      * @return The item to be returned.
      */
     public Item getItem(String itemName) {
-        for (Item item : inventory) {
-            if (item.getName().equals(itemName)) {
-                return item;
-            }
-        }
-        return null;
+        return inventory.get(itemName);
     }
 
     /**
@@ -61,16 +55,9 @@ public abstract class Container extends GameObject {
      * @return The item to be returned.
      */
     public Item removeItem(String itemName) {
-        Item item;
-        Iterator<Item> it = inventory.iterator();
-        while (it.hasNext()) {
-            item = it.next();
-            if (item.getName().equals(itemName)) {
-                it.remove();
-                return item;
-            }
-        }
-        return null;
+        Item item = getItem(itemName);
+        inventory.remove(itemName);
+        return item;
     }
 
     /**
@@ -117,7 +104,7 @@ public abstract class Container extends GameObject {
      */
     public String getInventoryString() {
         String result = "";
-        for (Item item : inventory) {
+        for (Item item : inventory.values()) {
             result += "  " + item.getName() + " has weight of " + item.getWeight() + "\n";
         }
         return result;
