@@ -24,7 +24,7 @@ public class Player extends Container {
      */
     @Override
     public String getInventoryString() {
-        return getName() + " inventory:" + super.getInventoryString();
+        return getName() + " inventory:\n" + super.getInventoryString();
     }
 
     /**

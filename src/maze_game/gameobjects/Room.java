@@ -54,7 +54,7 @@ public class Room extends Container {
      * @return Returns a String describing the room and its contents.
      */
     public String getRoomString() {
-        String result = "You are in " + getName() + "\n" + getDescription();
+        String result = "\nYou are in " + getName() + ".\n" + getDescription();
         if (!isEmpty()) {
             result += "\n" + getInventoryString();
         }
@@ -70,5 +70,10 @@ public class Room extends Container {
             result += "  " + direction.toString();
         }
         return result;
+    }
+
+    @Override
+    public String getInventoryString() {
+        return getName() + " contents:\n" + super.getInventoryString();
     }
 }
