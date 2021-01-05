@@ -72,8 +72,31 @@ public class Room extends Container {
         return result;
     }
 
+    /**
+     * @return Returns a String with the contents of the room.
+     */
     @Override
     public String getInventoryString() {
         return getName() + " contents:\n" + super.getInventoryString();
+    }
+
+    /**
+     * @return Returns a description of the object with name objectName, if there is
+     *         such an object. If there's no such object, return null.
+     */
+    @Override
+    public String findDescription(String objectName) {
+        String description = super.findDescription(objectName);
+        if (description != null) {
+            return description;
+        }
+
+        Direction direction = Direction.convertString(objectName);
+        Door door = getExit(direction);
+        if (door != null) {
+            return door.getDescription();
+        } else {
+            return null;
+        }
     }
 }

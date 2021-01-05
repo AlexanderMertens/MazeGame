@@ -15,7 +15,12 @@ public class LookCommand extends Command {
     @Override
     public boolean execute(GameState gameState) {
         if (hasArgument()) {
-            System.out.println(gameState.findDescription(getArgument()));
+            String description = gameState.findDescription(getArgument());
+            if (description != null) {
+                System.out.println(description);
+            } else {
+                System.out.println("There's no such object.");
+            }
         } else {
             System.out.println(gameState.getStateDescription());
         }

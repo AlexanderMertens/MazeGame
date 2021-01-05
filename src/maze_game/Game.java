@@ -38,13 +38,13 @@ public class Game {
 
         Item key = new Item("key", "a shiny key", 2);
         // initialize room exits
-        Door outEast = new Door("east", "", theater);
+        Door outEast = new Door("east", "Nice door.", theater);
         outside.setExit(Direction.EAST, outEast);
 
-        Door outSouth = new Door("south", "", lab);
+        Door outSouth = new Door("south", "Lovely door.", lab);
         outside.setExit(Direction.SOUTH, outSouth);
 
-        Door pubEntry = new LockedDoor("pub entry", "", pub, key);
+        Door pubEntry = new LockedDoor("pub entry", "test test.", pub, key);
         outside.setExit(Direction.WEST, pubEntry);
 
         Door theaterExit = new Door("theater exit", "", outside);
