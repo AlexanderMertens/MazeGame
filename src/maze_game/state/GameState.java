@@ -3,6 +3,9 @@ package maze_game.state;
 import java.util.Stack;
 
 import maze_game.directions.Direction;
+import maze_game.flag.Flag;
+import maze_game.gameobjects.Door;
+import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 
@@ -29,17 +32,24 @@ public class GameState {
      * direction, pushes the last currentRoom onto the Stack and return True.
      * 
      * @param direction The direction the player wishes to move.
-     * @return Returns true if the attempt is successful, else returns false.
+     * @return Returns a success flag if the player is successfully moved, else it
+     *         returns a flag containing a message describing what went wrong.
      */
-    public boolean go(Direction direction) {
-        Room nextRoom = currentRoom.getExit(direction);
+    public Flag go(String directionString) {
+        if (directionString == null) {
+            return Flag.NO_ARGUMENT;
+        }
+        Direction direction = Direction.convertString(directionString);
+        Door door = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            return false;
+        if (door == null) {
+            return Flag.NO_DOOR;
+        } else if (door.isLocked()) {
+            return Flag.LOCKED;
         } else {
             previousRooms.push(currentRoom);
-            setCurrentRoom(nextRoom);
-            return true;
+            setCurrentRoom(door.getRoom());
+            return Flag.MOVED;
         }
     }
 
@@ -83,6 +93,28 @@ public class GameState {
      */
     public boolean playerDrops(String itemName) {
         return player.giveItemTo(currentRoom, itemName);
+    }
+
+    public Flag openDoor(String directionString) {
+        if (directionString == null) {
+            return Flag.NO_ARGUMENT;
+        }
+        Direction direction = Direction.convertString(directionString);
+        Door door = currentRoom.getExit(direction);
+
+        if (door == null) {
+            return Flag.NO_DOOR;
+        } else if (!door.isLocked()) {
+            return Flag.UNLOCKED;
+        } else {
+            Item item = player.getItem(door.getKeyName());
+            if (item == null || !door.isKey(item)) {
+                return Flag.WRONG_KEY;
+            } else {
+                door.unlock(item);
+                return Flag.OPENED;
+            }
+        }
     }
 
     /**

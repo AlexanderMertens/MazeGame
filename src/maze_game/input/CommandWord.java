@@ -7,7 +7,8 @@ package maze_game.input;
  * @author Alexander Mertens
  */
 public enum CommandWord {
-    GO("go"), TAKE("take"), DROP("drop"), BACK("back"), QUIT("quit"), HELP("help"), LOOK("look"), UNKNOWN("?");
+    GO("go"), TAKE("take"), DROP("drop"), BACK("back"), QUIT("quit"), HELP("help"), LOOK("look"), OPEN("open"),
+    UNKNOWN("?");
 
     private String commandString;
 

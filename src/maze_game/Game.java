@@ -1,7 +1,9 @@
 package maze_game;
 
 import maze_game.directions.Direction;
+import maze_game.gameobjects.Door;
 import maze_game.gameobjects.Item;
+import maze_game.gameobjects.LockedDoor;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.commands.Command;
@@ -34,22 +36,39 @@ public class Game {
         lab = new Room("lab", "in a computing lab");
         office = new Room("office", "in the computing admin office");
 
+        Item key = new Item("key", "a shiny key", 2);
         // initialize room exits
-        outside.setExit(Direction.EAST, theater);
-        outside.setExit(Direction.SOUTH, lab);
-        outside.setExit(Direction.WEST, pub);
-        theater.setExit(Direction.WEST, outside);
-        pub.setExit(Direction.EAST, outside);
-        lab.setExit(Direction.NORTH, outside);
-        lab.setExit(Direction.EAST, office);
-        office.setExit(Direction.WEST, lab);
+        Door outEast = new Door("east", "", theater);
+        outside.setExit(Direction.EAST, outEast);
+
+        Door outSouth = new Door("south", "", lab);
+        outside.setExit(Direction.SOUTH, outSouth);
+
+        Door pubEntry = new LockedDoor("pub entry", "", pub, key);
+        outside.setExit(Direction.WEST, pubEntry);
+
+        Door theaterExit = new Door("theater exit", "", outside);
+        theater.setExit(Direction.WEST, theaterExit);
+
+        Door pubExit = new Door("pub exit", "", outside);
+        pub.setExit(Direction.EAST, pubExit);
+
+        Door labExit = new Door("", "", outside);
+        lab.setExit(Direction.NORTH, labExit);
+
+        Door officeDoor = new Door("office door", "pretty door", office);
+        lab.setExit(Direction.EAST, officeDoor);
+
+        Door officeExit = new Door("exit", "old door", lab);
+        office.setExit(Direction.WEST, officeExit);
 
         // add items to rooms
-        theater.addItem(new Item("Microphone", "", 1.5));
-        pub.addItem(new Item("Glass", "", 0.2));
-        pub.addItem(new Item("Chair", "", 2));
-        office.addItem(new Item("Desk", "", 52.5));
-        office.addItem(new Item("Laptop", "", 15.3));
+        theater.addItem(new Item("microphone", "", 1.5));
+        pub.addItem(new Item("glass", "", 0.2));
+        pub.addItem(new Item("chair", "", 2));
+        office.addItem(new Item("desk", "", 52.5));
+        office.addItem(new Item("laptop", "", 15.3));
+        office.addItem(key);
 
         Player player = new Player("Alexander", "");
         gameState = new GameState(player, outside);

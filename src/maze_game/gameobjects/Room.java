@@ -15,7 +15,7 @@ import maze_game.directions.Direction;
  * @author Alexander Mertens
  */
 public class Room extends Container {
-    private HashMap<Direction, Room> exits;
+    private HashMap<Direction, Door> exits;
 
     /**
      * Constructs an empty room with no exits.
@@ -33,20 +33,20 @@ public class Room extends Container {
      * with the given parameter.
      * 
      * @param direction Direction of the exit.
-     * @param exit      Room object that represents the exit.
+     * @param exit      Door object that represents the exit.
      */
-    public void setExit(Direction direction, Room exit) {
+    public void setExit(Direction direction, Door exit) {
         exits.put(direction, exit);
     }
 
     /**
      * Retrieves an exit of this room in the given direction. Returns null if
-     * there's no Room in the given direction.
+     * there's no Door in the given direction.
      * 
-     * @param direction Direction of the Room to be retrieved.
-     * @return Returns Room object in the given direction.
+     * @param direction Direction of the Door to be retrieved.
+     * @return Returns Door object in the given direction.
      */
-    public Room getExit(Direction direction) {
+    public Door getExit(Direction direction) {
         return exits.get(direction);
     }
 

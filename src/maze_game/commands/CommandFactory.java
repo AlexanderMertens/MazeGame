@@ -19,6 +19,8 @@ public class CommandFactory {
                 return new TakeCommand(argument);
             case QUIT:
                 return new QuitCommand(argument);
+            case OPEN:
+                return new OpenCommand(argument);
             default:
                 return new UnknownCommand(argument);
         }
