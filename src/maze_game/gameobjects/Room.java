@@ -2,8 +2,8 @@ package maze_game.gameobjects;
 
 import maze_game.directions.Direction;
 import maze_game.gameobjects.interactive.InteractiveObject;
-import maze_game.mapping.ExitMapping;
-import maze_game.mapping.InteractiveObjectMapping;
+import maze_game.mapping.GameObjectMap;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * The Room class models a GameObject that represents a single room in the maze.
@@ -17,9 +17,9 @@ import maze_game.mapping.InteractiveObjectMapping;
  */
 public class Room extends Container {
     // A map of all exits
-    private ExitMapping exits;
+    private GameObjectMap<Direction, Door> exits;
     // A map of all objects in the room that the player can interact with.
-    private InteractiveObjectMapping objects;
+    private GameObjectMapByName<InteractiveObject> objects;
 
     /**
      * Constructs an empty room with no exits.
@@ -29,8 +29,8 @@ public class Room extends Container {
      */
     public Room(String name, String description) {
         super(name, description);
-        exits = new ExitMapping();
-        objects = new InteractiveObjectMapping();
+        exits = new GameObjectMap<>();
+        objects = new GameObjectMapByName<>();
     }
 
     /**

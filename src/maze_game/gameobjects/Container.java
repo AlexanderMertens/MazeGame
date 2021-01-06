@@ -1,7 +1,7 @@
 package maze_game.gameobjects;
 
 import maze_game.flag.Flag;
-import maze_game.mapping.Inventory;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * The Container class models a GameObject that can contain items. It extends
@@ -14,7 +14,7 @@ import maze_game.mapping.Inventory;
  * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
-    private Inventory inventory;
+    private GameObjectMapByName<Item> inventory;
 
     /**
      * Constructs an empty container with given name and description.
@@ -24,7 +24,7 @@ public abstract class Container extends GameObject {
      */
     public Container(String name, String description) {
         super(name, description);
-        inventory = new Inventory();
+        inventory = new GameObjectMapByName<>();
     }
 
     /**

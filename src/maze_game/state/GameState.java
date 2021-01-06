@@ -9,7 +9,7 @@ import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.gameobjects.interactive.InteractiveObject;
-import maze_game.mapping.InteractiveObjectMapping;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * Class that represents the current state of the gameworld. The class has
@@ -28,7 +28,7 @@ public class GameState {
     private Player player;
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
-    private InteractiveObjectMapping objects;
+    private GameObjectMapByName<InteractiveObject> objects;
 
     /**
      * Creates a new GameState with given player and currentRoom.
@@ -40,7 +40,7 @@ public class GameState {
         this.player = player;
         this.currentRoom = currentRoom;
         directionHistory = new Stack<>();
-        objects = new InteractiveObjectMapping();
+        objects = new GameObjectMapByName<>();
     }
 
     /**
