@@ -18,7 +18,10 @@ public enum Flag {
 
     // opening doors
     OPENED("You have unlocked the door.", true), WRONG_KEY("You do not have the right key in inventory.", false),
-    UNLOCKED("This door is already unlocked.", false);
+    UNLOCKED("This door is already unlocked.", false),
+
+    // interacting
+    INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no object with that name.", false);
 
     private String message;
     private boolean success;
