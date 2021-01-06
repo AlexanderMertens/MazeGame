@@ -44,7 +44,7 @@ public class Door extends GameObject {
      * 
      * @param keyItem Potential key to the door.
      */
-    public void unlock(Item item) {
+    public void unlock(GameObject object) {
         return;
     }
 
@@ -55,7 +55,7 @@ public class Door extends GameObject {
      * @param item
      * @return false
      */
-    public boolean isKey(Item item) {
+    public boolean isKey(GameObject object) {
         return false;
     }
 

@@ -1,6 +1,7 @@
 package maze_game.gameobjects.interactive;
 
 import maze_game.gameobjects.GameObject;
+import maze_game.state.GameState;
 
 /**
  * This class represents an object in the game world that the player can
@@ -24,6 +25,8 @@ public abstract class InteractiveObject extends GameObject {
     private String defaultDialogue;
     // Records whether the player has interacted with the object.
     private boolean hasInteracted;
+    // Records whether the player is allowed to remove this from the room.
+    private boolean removable;
 
     /**
      * Creates a character with given name, description and dialogue.
@@ -33,11 +36,13 @@ public abstract class InteractiveObject extends GameObject {
      * @param initialDialogue Dialogue upon first interacting with the object.
      * @param defaultDialogue Dialogue after interacting with the object.
      */
-    public InteractiveObject(String name, String description, String initialDialogue, String defaultDialogue) {
+    public InteractiveObject(String name, String description, String initialDialogue, String defaultDialogue,
+            boolean removable) {
         super(name, description);
         this.initialDialogue = initialDialogue;
         this.defaultDialogue = defaultDialogue;
         this.hasInteracted = false;
+        this.removable = removable;
     }
 
     /**
@@ -53,6 +58,10 @@ public abstract class InteractiveObject extends GameObject {
 
     public void resetHasInteracted() {
         this.hasInteracted = false;
+    }
+
+    public boolean isRemovable() {
+        return this.removable;
     }
 
     /**
@@ -77,5 +86,5 @@ public abstract class InteractiveObject extends GameObject {
         return getName() + ": " + getDescription();
     }
 
-    public abstract void interact();
+    public abstract void interact(GameState gameState);
 }

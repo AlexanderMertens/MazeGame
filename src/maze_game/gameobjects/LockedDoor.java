@@ -8,7 +8,7 @@ package maze_game.gameobjects;
  * @author Alexander Mertens
  */
 public class LockedDoor extends Door {
-    private Item keyItem;
+    private GameObject keyObject;
     private boolean locked;
 
     /**
@@ -20,9 +20,9 @@ public class LockedDoor extends Door {
      * @param room        The room the door leads to.
      * @param keyItem     The item that can open the door.
      */
-    public LockedDoor(String name, String description, Room room, Item keyItem) {
+    public LockedDoor(String name, String description, Room room, GameObject keyObject) {
         super(name, description, room);
-        this.keyItem = keyItem;
+        this.keyObject = keyObject;
         this.locked = true;
     }
 
@@ -39,15 +39,15 @@ public class LockedDoor extends Door {
      */
     @Override
     public String getKeyName() {
-        return this.keyItem.getName();
+        return this.keyObject.getName();
     }
 
     /**
      * Unlocks the door if it's locked and the given item is the correct key.
      */
     @Override
-    public void unlock(Item item) {
-        if (isLocked() && isKey(item)) {
+    public void unlock(GameObject object) {
+        if (isLocked() && isKey(object)) {
             this.locked = false;
         }
     }
@@ -70,7 +70,7 @@ public class LockedDoor extends Door {
      *         door.
      */
     @Override
-    public boolean isKey(Item item) {
-        return this.keyItem == item;
+    public boolean isKey(GameObject object) {
+        return this.keyObject == object;
     }
 }

@@ -10,6 +10,8 @@ import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.gameobjects.interactive.Character;
 import maze_game.gameobjects.interactive.InteractiveObject;
+import maze_game.gameobjects.interactive.LinkedMechanism;
+import maze_game.gameobjects.interactive.LockMechanism;
 import maze_game.commands.Command;
 import maze_game.condition.Condition;
 import maze_game.condition.LoseCondition;
@@ -36,7 +38,7 @@ public class Game {
      * Creates all the rooms, links their exits and sets their contents.
      */
     private void createRooms() {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, trapRoom;
 
         // create the rooms
         outside = new Room("outside", "outside the main entrance of the university");
@@ -44,6 +46,7 @@ public class Game {
         pub = new Room("pub", "in the campus pub");
         lab = new Room("lab", "in a computing lab");
         office = new Room("office", "in the computing admin office");
+        trapRoom = new Room("trap", "you are trapped!");
 
         Item key = new Item("key", "a shiny key", 2);
         // initialize room exits
@@ -55,6 +58,25 @@ public class Game {
 
         Door pubEntry = new LockedDoor("pub entry", "test test.", pub, key);
         outside.setExit(Direction.WEST, pubEntry);
+
+        Door trapDoor = new Door("entry", "beware", trapRoom);
+        outside.setExit(Direction.NORTH, trapDoor);
+
+        String poisonDialogue = "As you press the button, you hear a disappointing *clunk* indicating the mechanism has reset.\n"
+                + "As the room keeps filling with poisonous gas, your head starts to feel lighter and lighter.";
+        String correctDialogue = "As you press the button, you hear a satisfying *click*.";
+        LinkedMechanism firstMechanism = new LinkedMechanism("a", "hit first", poisonDialogue, correctDialogue, null,
+                true);
+        LinkedMechanism secondMechanism = new LinkedMechanism("b", "hit second", poisonDialogue, correctDialogue,
+                firstMechanism, true);
+        LockMechanism mechKey = new LockMechanism("c", "hit last", poisonDialogue, correctDialogue, secondMechanism,
+                true);
+        Door lock = new LockedDoor("door that will kill you", "it will kill", outside, mechKey);
+        mechKey.setDoor(lock);
+        trapRoom.setExit(Direction.SOUTH, lock);
+        trapRoom.addInteractive(firstMechanism);
+        trapRoom.addInteractive(secondMechanism);
+        trapRoom.addInteractive(mechKey);
 
         Door theaterExit = new Door("theater exit", "", outside);
         theater.setExit(Direction.WEST, theaterExit);

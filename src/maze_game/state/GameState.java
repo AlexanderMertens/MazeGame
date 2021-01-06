@@ -203,6 +203,8 @@ public class GameState {
         InteractiveObject object = room.removeObject(objectName);
         if (object == null) {
             return Flag.NO_OBJECT_ROOM;
+        } else if (!object.isRemovable()) {
+            return Flag.IMMOVABLE;
         }
         addInteractive(object);
         return Flag.OBJECT_MOVED;
@@ -246,7 +248,7 @@ public class GameState {
             return Flag.NO_OBJECT;
         }
 
-        object.interact();
+        object.interact(this);
         return Flag.INTERACTED;
     }
 
@@ -294,6 +296,13 @@ public class GameState {
      */
     public boolean containsObject(InteractiveObject object) {
         return objects.contains(object);
+    }
+
+    /**
+     * The player takes a hit to their health.
+     */
+    public void getHit() {
+        player.getHit();
     }
 
     private void setCurrentRoom(Room newRoom) {

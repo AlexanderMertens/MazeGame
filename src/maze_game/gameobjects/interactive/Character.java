@@ -1,5 +1,7 @@
 package maze_game.gameobjects.interactive;
 
+import maze_game.state.GameState;
+
 /**
  * This class represents a character in the game world. A character has a string
  * of dialogue for when it meets the player, and another string of dialogue for
@@ -18,14 +20,14 @@ public class Character extends InteractiveObject {
      * @param defaultDialogue Dialogue after meeting of the character.
      */
     public Character(String name, String description, String initialDialogue, String defaultDialogue) {
-        super(name, description, initialDialogue, defaultDialogue);
+        super(name, description, initialDialogue, defaultDialogue, true);
     }
 
     /**
      * The player "talks" to the character, character responds with some dialogue.
      * The character remembers if the player has already met them.
      */
-    public void interact() {
+    public void interact(GameState gameState) {
         System.out.println(getDialogue());
 
         if (!hasInteracted()) {
