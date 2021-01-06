@@ -1,5 +1,6 @@
 package maze_game.gameobjects.interactive;
 
+import maze_game.flag.Flag;
 import maze_game.gameobjects.Door;
 import maze_game.state.GameState;
 
@@ -19,10 +20,11 @@ public class LockMechanism extends LinkedMechanism {
         this.door = door;
     }
 
-    public void interact(GameState gameState) {
-        super.interact(gameState);
+    public Flag interact(GameState gameState) {
+        Flag flag = super.interact(gameState);
         if (hasInteracted()) {
             door.unlock(this);
         }
+        return flag;
     }
 }

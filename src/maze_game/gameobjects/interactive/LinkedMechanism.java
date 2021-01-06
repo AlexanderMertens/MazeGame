@@ -1,5 +1,6 @@
 package maze_game.gameobjects.interactive;
 
+import maze_game.flag.Flag;
 import maze_game.state.GameState;
 
 /**
@@ -29,7 +30,10 @@ public class LinkedMechanism extends InteractiveObject {
         resetPrevious();
     }
 
-    public void interact(GameState gameState) {
+    public Flag interact(GameState gameState) {
+        if (hasInteracted()) {
+            return Flag.NO_EFFECT;
+        }
         if (!hasPrevious() || (hasPrevious() && previousMechanism.hasInteracted())) {
             setHasInteracted();
         } else {
@@ -39,6 +43,7 @@ public class LinkedMechanism extends InteractiveObject {
             resetPrevious();
         }
         System.out.println(getDialogue());
+        return Flag.INTERACTED;
     }
 
     private void resetPrevious() {

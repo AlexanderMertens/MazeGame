@@ -1,5 +1,6 @@
 package maze_game.gameobjects.interactive;
 
+import maze_game.flag.Flag;
 import maze_game.state.GameState;
 
 /**
@@ -27,11 +28,12 @@ public class Character extends InteractiveObject {
      * The player "talks" to the character, character responds with some dialogue.
      * The character remembers if the player has already met them.
      */
-    public void interact(GameState gameState) {
+    public Flag interact(GameState gameState) {
         System.out.println(getDialogue());
 
         if (!hasInteracted()) {
             setHasInteracted();
         }
+        return Flag.INTERACTED;
     }
 }

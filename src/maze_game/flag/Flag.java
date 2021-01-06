@@ -25,7 +25,7 @@ public enum Flag {
     NO_OBJECT_ROOM("There's no object with that name in the room.", false),
     OBJECT_MOVED("The object has been moved", true),
     NO_OBJECT_PARTY("There's no object with that name in the party.", false),
-    IMMOVABLE("This object can't be moved.", false),
+    IMMOVABLE("This object can't be moved.", false), NO_EFFECT("Interacting with this object had no effect.", false),
 
     // back
     NO_HISTORY("You do not have any previously visited locations.", false);

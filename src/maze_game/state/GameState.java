@@ -249,8 +249,7 @@ public class GameState {
             return Flag.NO_OBJECT;
         }
 
-        object.interact(this);
-        return Flag.INTERACTED;
+        return object.interact(this);
     }
 
     /**
