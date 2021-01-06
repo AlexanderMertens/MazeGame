@@ -22,7 +22,7 @@ public class GameState {
     private Room currentRoom;
     // Holds Stack with the previous directions the player went with
     // Used to reconstruct the player's path
-    private Stack<Direction> previousDirections;
+    private Stack<Direction> directionHistory;
     private Player player;
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
@@ -37,7 +37,7 @@ public class GameState {
     public GameState(Player player, Room currentRoom) {
         this.player = player;
         this.currentRoom = currentRoom;
-        previousDirections = new Stack<>();
+        directionHistory = new Stack<>();
         objects = new InteractiveObjectMapping();
     }
 
@@ -59,7 +59,7 @@ public class GameState {
         Direction direction = Direction.convertString(directionString);
         Flag flag = go(direction);
         if (flag.isSuccess()) {
-            previousDirections.push(direction);
+            directionHistory.push(direction);
         }
         return flag;
     }
@@ -95,13 +95,13 @@ public class GameState {
      *         returns a flag containing a message describing what went wrong.
      */
     public Flag goBack() {
-        if (previousDirections.isEmpty()) {
+        if (directionHistory.isEmpty()) {
             return Flag.NO_HISTORY;
         } else {
             // Takes the last known direction from the stack and reverses it to reverse path
-            Flag flag = go(previousDirections.peek().reverse());
+            Flag flag = go(directionHistory.peek().reverse());
             if (flag.isSuccess()) {
-                previousDirections.pop();
+                directionHistory.pop();
             }
             return flag;
         }
