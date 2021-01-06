@@ -48,7 +48,11 @@ public abstract class InteractiveObject extends GameObject {
         return hasInteracted;
     }
 
-    public void reset() {
+    public void setHasInteracted() {
+        this.hasInteracted = true;
+    }
+
+    public void resetHasInteracted() {
         this.hasInteracted = false;
     }
 
@@ -64,6 +68,14 @@ public abstract class InteractiveObject extends GameObject {
         } else {
             return initialDialogue;
         }
+    }
+
+    /**
+     * Returns a String containing a longer description of the object.
+     */
+    @Override
+    public String getLongDescription() {
+        return getName() + ": " + getDescription();
     }
 
     public abstract void interact(GameState gameState);

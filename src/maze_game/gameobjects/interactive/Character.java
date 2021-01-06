@@ -24,11 +24,12 @@ public class Character extends InteractiveObject {
     }
 
     public void interact(GameState gameState) {
-        System.out.println(getDescription());
+        System.out.println(getDialogue());
 
         if (!hasInteracted()) {
             setHasInteracted();
             gameState.addInteractive(this);
+            gameState.removeFromRoom(getName());
         }
     }
 }

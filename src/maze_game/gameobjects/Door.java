@@ -67,4 +67,11 @@ public class Door extends GameObject {
     public Room getRoom() {
         return room;
     }
+
+    /**
+     * @return Returns longer description of door.
+     */
+    public String getLongDescription() {
+        return getName() + ": " + getDescription();
+    }
 }

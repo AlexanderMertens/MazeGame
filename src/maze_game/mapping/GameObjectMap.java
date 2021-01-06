@@ -66,6 +66,15 @@ public class GameObjectMap<K, V extends GameObject> {
     }
 
     /**
+     * @param key The key to be found.
+     * @return Returns true if the mapping contains the given key, else it returns
+     *         false.
+     */
+    public boolean containsKey(K key) {
+        return objectMap.containsKey(key);
+    }
+
+    /**
      * Finds the description of the object with the given key and returns it.
      * Returns null if there's no such object.
      * 

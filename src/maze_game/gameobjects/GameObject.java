@@ -36,4 +36,9 @@ public abstract class GameObject {
     public String getDescription() {
         return this.description;
     }
+
+    /**
+     * @return Returns the full description of this object.
+     */
+    public abstract String getLongDescription();
 }

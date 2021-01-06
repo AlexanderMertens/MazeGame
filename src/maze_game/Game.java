@@ -6,6 +6,7 @@ import maze_game.gameobjects.Item;
 import maze_game.gameobjects.LockedDoor;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
+import maze_game.gameobjects.interactive.Character;
 import maze_game.commands.Command;
 import maze_game.input.CommandWord;
 import maze_game.input.Parser;
@@ -69,6 +70,9 @@ public class Game {
         office.addItem(new Item("desk", "", 52.5));
         office.addItem(new Item("laptop", "", 15.3));
         office.addItem(key);
+
+        // add interactive objects to rooms
+        theater.addInteractive(new Character("phil", "A tall man", "Hello!", "Where are we going?"));
 
         Player player = new Player("Alexander", "");
         gameState = new GameState(player, outside);

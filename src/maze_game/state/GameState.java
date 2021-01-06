@@ -8,6 +8,8 @@ import maze_game.gameobjects.Door;
 import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
+import maze_game.gameobjects.interactive.InteractiveObject;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * Class that represents the current state of the gameworld. The class has
@@ -20,6 +22,9 @@ public class GameState {
     private Room currentRoom;
     private Stack<Room> previousRooms;
     private Player player;
+    // A mapping of characters and objects that are in the party
+    // The player can interact with these via the interact command
+    private GameObjectMapByName<InteractiveObject> objects;
 
     /**
      * Creates a new GameState with given player and currentRoom.
@@ -31,6 +36,7 @@ public class GameState {
         this.player = player;
         this.currentRoom = currentRoom;
         previousRooms = new Stack<>();
+        objects = new GameObjectMapByName<>();
     }
 
     /**
@@ -125,13 +131,52 @@ public class GameState {
     }
 
     /**
+     * Adds InteractiveObject to the party. The player can interact with this object
+     * again with command interact.
+     * 
+     * @param object The object to be added.
+     */
+    public void addInteractive(InteractiveObject object) {
+        if (!containsInteractive(object.getName())) {
+            objects.put(object.getName(), object);
+        }
+    }
+
+    /**
+     * Removes the object from the contents of the current room if there's an object
+     * with the given name.
+     * 
+     * @param objectName The name of the object to be removed.
+     */
+    public void removeFromRoom(String objectName) {
+        currentRoom.removeObject(objectName);
+    }
+
+    public Flag interact(String objectName) {
+        if (objectName == null) {
+            return Flag.NO_ARGUMENT;
+        }
+        InteractiveObject object = currentRoom.getObject(objectName);
+        if (object == null) {
+            object = objects.get(objectName);
+        }
+
+        if (object == null) {
+            return Flag.NO_OBJECT;
+        }
+
+        object.interact(this);
+        return Flag.INTERACTED;
+    }
+
+    /**
      * @return Returns a String with the full description of the Room the player is
      *         in, its contents and the contents of the player's inventory.
      */
     public String getStateDescription() {
-        String result = currentRoom.getRoomString() + "\n";
-        if (!player.isEmpty()) {
-            result += player.getInventoryString() + "\n";
+        String result = currentRoom.getLongDescription() + "\n";
+        if (!player.isInventoryEmpty()) {
+            result += player.getLongDescription() + "\n";
         }
         result += currentRoom.getExitsString() + "\n";
         return result;
@@ -156,5 +201,9 @@ public class GameState {
 
     private void setCurrentRoom(Room newRoom) {
         this.currentRoom = newRoom;
+    }
+
+    private boolean containsInteractive(String objectName) {
+        return objects.containsKey(objectName);
     }
 }

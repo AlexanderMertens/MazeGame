@@ -23,8 +23,8 @@ public class Player extends Container {
      * @return Returns a String representing the inventory of the player.
      */
     @Override
-    public String getInventoryString() {
-        return getName() + " inventory:\n" + super.getInventoryString();
+    public String getLongDescription() {
+        return getName() + " inventory:\n" + super.getLongDescription();
     }
 
     /**
