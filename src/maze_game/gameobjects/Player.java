@@ -35,7 +35,7 @@ public class Player extends Container {
         if (!isInventoryEmpty()) {
             return getName() + " inventory:" + super.getLongDescription() + "\n";
         } else {
-            return "Inventory is empty.\n";
+            return "Inventory is empty.";
         }
     }
 

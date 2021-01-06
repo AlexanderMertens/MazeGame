@@ -276,7 +276,7 @@ public class GameState {
         }
 
         if (description.equals("")) {
-            description = "You are all alone in the party.\n";
+            description = "You are all alone in the party.";
         }
         return description;
     }
