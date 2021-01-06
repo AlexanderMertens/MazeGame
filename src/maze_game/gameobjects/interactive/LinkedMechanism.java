@@ -19,7 +19,7 @@ public class LinkedMechanism extends InteractiveObject {
 
     public LinkedMechanism(String name, String description, String initialDialogue, String defaultDialogue,
             LinkedMechanism previousMechanism, boolean trapped) {
-        super(name, description, initialDialogue, defaultDialogue, true);
+        super(name, description, initialDialogue, defaultDialogue, false);
         this.previousMechanism = previousMechanism;
         this.trapped = trapped;
     }
