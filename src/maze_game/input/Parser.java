@@ -50,8 +50,9 @@ public class Parser {
         if (tokenizer.hasNext()) {
             commandWord = commands.getCommandWord(tokenizer.next()); // get first word
             if (tokenizer.hasNext()) {
-                argument = tokenizer.next(); // get second word
-                // note: we just ignore the rest of the input line.
+                argument = tokenizer.next();
+                while (tokenizer.hasNext())
+                    argument += " " + tokenizer.next(); // get argument
             }
         }
         tokenizer.close();

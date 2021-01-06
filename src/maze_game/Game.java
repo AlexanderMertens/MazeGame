@@ -72,7 +72,7 @@ public class Game {
         office.setExit(Direction.WEST, officeExit);
 
         // add items to rooms
-        theater.addItem(new Item("microphone", "", 1.5));
+        theater.addItem(new Item("micro phone", "test", 1.5));
         pub.addItem(new Item("glass", "", 0.2));
         pub.addItem(new Item("chair", "", 2));
         office.addItem(new Item("desk", "", 52.5));

@@ -9,6 +9,10 @@ import maze_game.input.CommandWord;
  */
 public class CommandFactory {
     public Command getCommand(CommandWord commandWord, String argument) {
+        if (commandWord == null) {
+            return new UnknownCommand(argument);
+        }
+
         switch (commandWord) {
             case DROP:
                 return new DropCommand(argument);
