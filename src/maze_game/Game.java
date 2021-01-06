@@ -1,5 +1,7 @@
 package maze_game;
 
+import java.util.ArrayList;
+
 import maze_game.directions.Direction;
 import maze_game.gameobjects.Door;
 import maze_game.gameobjects.Item;
@@ -7,7 +9,11 @@ import maze_game.gameobjects.LockedDoor;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.gameobjects.interactive.Character;
+import maze_game.gameobjects.interactive.InteractiveObject;
 import maze_game.commands.Command;
+import maze_game.condition.Condition;
+import maze_game.condition.LoseCondition;
+import maze_game.condition.VictoryCondition;
 import maze_game.input.CommandWord;
 import maze_game.input.Parser;
 import maze_game.state.GameState;
@@ -15,6 +21,8 @@ import maze_game.state.GameState;
 public class Game {
     private Parser parser;
     private GameState gameState;
+    private Condition victoryCondition;
+    private Condition loseCondition;
 
     /**
      * Creates the game and initializes all the rooms and their contents;
@@ -72,10 +80,15 @@ public class Game {
         office.addItem(key);
 
         // add interactive objects to rooms
-        theater.addInteractive(new Character("phil", "A tall man", "Hello!", "Where are we going?"));
+        InteractiveObject phil = new Character("phil", "A tall man", "Hello!", "Where are we going?");
+        theater.addInteractive(phil);
 
         Player player = new Player("Alexander", "");
+        ArrayList<InteractiveObject> characterList = new ArrayList<>();
+        characterList.add(phil);
         gameState = new GameState(player, outside);
+        victoryCondition = new VictoryCondition("You won the game!", gameState, characterList, outside);
+        loseCondition = new LoseCondition("You lost the game, too bad!", player);
     }
 
     /**
@@ -90,7 +103,16 @@ public class Game {
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
-            finished = command.execute(gameState);
+            finished = command.execute(gameState) || victoryCondition.isSatisfied() || loseCondition.isSatisfied();
+        }
+        if (loseCondition.isSatisfied()) {
+            loseCondition.printMessage();
+            return;
+        }
+
+        if (victoryCondition.isSatisfied()) {
+            victoryCondition.printMessage();
+            return;
         }
         System.out.println("Thank you for playing.  Good bye.");
     }

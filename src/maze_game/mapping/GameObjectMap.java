@@ -75,6 +75,15 @@ public class GameObjectMap<K, V extends GameObject> {
     }
 
     /**
+     * @param object The object to be checked.
+     * @return Returns true if the mapping contains the given value, else it returns
+     *         false.
+     */
+    public boolean contains(V object) {
+        return objectMap.containsValue(object);
+    }
+
+    /**
      * Finds the description of the object with the given key and returns it.
      * Returns null if there's no such object.
      * 

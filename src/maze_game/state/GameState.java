@@ -19,10 +19,12 @@ import maze_game.mapping.InteractiveObjectMapping;
  * @author Alexander Mertens
  */
 public class GameState {
+    // The current room the player occupies
     private Room currentRoom;
     // Holds Stack with the previous directions the player went with
     // Used to reconstruct the player's path
     private Stack<Direction> directionHistory;
+    // The player character
     private Player player;
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
@@ -276,6 +278,22 @@ public class GameState {
             description = currentRoom.findDescription(objectName);
         }
         return description;
+    }
+
+    /**
+     * @param room The room to be checked.
+     * @return Returns true if the player is currently at the given room.
+     */
+    public boolean isAt(Room room) {
+        return room == currentRoom;
+    }
+
+    /**
+     * @param object The object to be checked.
+     * @return Returns true if the party currently contains the given object.
+     */
+    public boolean containsObject(InteractiveObject object) {
+        return objects.contains(object);
     }
 
     private void setCurrentRoom(Room newRoom) {
