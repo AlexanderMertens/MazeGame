@@ -200,13 +200,13 @@ public class GameState {
      * @return Returns a Flag containing a message detailing what happened.
      */
     public Flag moveObjectFrom(Room room, String objectName) {
-        InteractiveObject object = room.removeObject(objectName);
+        InteractiveObject object = room.getObject(objectName);
         if (object == null) {
             return Flag.NO_OBJECT_ROOM;
         } else if (!object.isRemovable()) {
-            room.addInteractive(object);
             return Flag.IMMOVABLE;
         }
+        room.removeObject(objectName);
         addInteractive(object);
         return Flag.OBJECT_MOVED;
     }

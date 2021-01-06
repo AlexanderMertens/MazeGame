@@ -33,7 +33,7 @@ public class Player extends Container {
     @Override
     public String getLongDescription() {
         if (!isInventoryEmpty()) {
-            return getName() + " inventory:" + super.getLongDescription() + "\n";
+            return getName() + " inventory:" + super.getLongDescription();
         } else {
             return "Inventory is empty.";
         }
