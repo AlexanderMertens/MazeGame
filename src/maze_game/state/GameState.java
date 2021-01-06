@@ -108,42 +108,43 @@ public class GameState {
     }
 
     /**
-     * Looks for an Item with the name itemName in the currentRoom. If there is such
-     * an item, it is removed from the room, put in the player's inventory and
-     * returns true. If there's no such item, it simply returns false.
+     * Looks for an object with the name objectName in the currentRoom. If there is
+     * such an object, it is removed from the room, put in the player's inventory or
+     * the party's interactive objects map and returns a success Flag. If there's no
+     * such item, it returns an appropriate Flag.
      * 
-     * @param itemName Name of the item to be removed from the room.
+     * @param objectName Name of the item to be removed from the room.
      * @return Returns a succes Flag if the item is successfully dropped into the
      *         room, else it returns a Flag containing a message with what went
      *         wrong.
      */
-    public Flag playerTakes(String itemName) {
-        Flag flag = player.takeItemFrom(currentRoom, itemName);
-        if (flag == Flag.NO_ITEM) {
-            return Flag.NO_ITEM_ROOM;
-        } else {
-            return flag;
+    public Flag playerTakes(String objectName) {
+        Flag flag = player.takeItemFrom(currentRoom, objectName);
+        if (!flag.isSuccess()) {
+            flag = this.moveObjectFrom(currentRoom, objectName);
         }
+        return flag;
     }
 
     /**
-     * Looks for an Item with the name itemName in the player's inventory. If there
-     * is such an item, it is removed from the inventory, put in the room's
-     * inventory and returns a succesfull Flag. Else it does nothing and returns a
-     * Flag containing an appropriate message.
+     * Looks for an object with the name objectName in the player's inventory or in
+     * the party's interactive object map. If there is such an object, it is removed
+     * from the inventory or the mapping, put in the room's contents and returns a
+     * succesfull Flag. Else it does nothing and returns a Flag containing an
+     * appropriate message.
      * 
-     * @param itemName Name of the item to be removed from the player's inventory.
+     * @param objectName Name of the item to be removed from the player's inventory
+     *                   or party.
      * @return Returns a succes Flag if the item is successfully dropped into the
      *         room, else it returns a Flag containing a message with what went
      *         wrong.
      */
-    public Flag playerDrops(String itemName) {
-        Flag flag = player.giveItemTo(currentRoom, itemName);
-        if (flag == Flag.NO_ITEM) {
-            return Flag.NO_ITEM_INV;
-        } else {
-            return flag;
+    public Flag playerDrops(String objectName) {
+        Flag flag = player.giveItemTo(currentRoom, objectName);
+        if (!flag.isSuccess()) {
+            flag = moveObjectTo(currentRoom, objectName);
         }
+        return flag;
     }
 
     /**
@@ -182,19 +183,45 @@ public class GameState {
      * @param object The object to be added.
      */
     public void addInteractive(InteractiveObject object) {
-        if (!containsInteractive(object.getName())) {
-            objects.put(object.getName(), object);
-        }
+        objects.put(object.getName(), object);
     }
 
     /**
-     * Removes the object from the contents of the current room if there's an object
-     * with the given name.
+     * Removes the object from the contents of the room if there's an object with
+     * the given name and puts it in the party. Returns a success Flag if there's
+     * such an object in the room and it can be taken, else it returns an
+     * appropriate Flag.
      * 
+     * @param room       The Room the object is to be moved to.
      * @param objectName The name of the object to be removed.
+     * 
+     * @return Returns a Flag containing a message detailing what happened.
      */
-    public void removeFromRoom(String objectName) {
-        currentRoom.removeObject(objectName);
+    public Flag moveObjectFrom(Room room, String objectName) {
+        InteractiveObject object = room.removeObject(objectName);
+        if (object == null) {
+            return Flag.NO_OBJECT_ROOM;
+        }
+        addInteractive(object);
+        return Flag.OBJECT_MOVED;
+    }
+
+    /**
+     * Removes the object from the party if there's an object with the given name
+     * and puts it in the party. Returns a success Flag if there's such an object,
+     * else it does nothing and returns an appropriate Flag.
+     * 
+     * @param room       The Room the object is to be removed from.
+     * @param objectName The object to be moved.
+     * @return Returns a Flag containing a message detailing what happened.
+     */
+    public Flag moveObjectTo(Room room, String objectName) {
+        InteractiveObject object = objects.remove(objectName);
+        if (object == null) {
+            return Flag.NO_OBJECT_PARTY;
+        }
+        room.addInteractive(object);
+        return Flag.OBJECT_MOVED;
     }
 
     /**
@@ -217,7 +244,7 @@ public class GameState {
             return Flag.NO_OBJECT;
         }
 
-        object.interact(this);
+        object.interact();
         return Flag.INTERACTED;
     }
 
@@ -253,9 +280,5 @@ public class GameState {
 
     private void setCurrentRoom(Room newRoom) {
         this.currentRoom = newRoom;
-    }
-
-    private boolean containsInteractive(String objectName) {
-        return objects.containsKey(objectName);
     }
 }

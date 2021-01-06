@@ -127,12 +127,15 @@ public class Room extends Container {
 
     /**
      * Removes the object with the given name from the contents of the room if
-     * there's such an object.
+     * there's such an object, and returns it. Returns null if there's no such
+     * object.
      * 
-     * @param objectName
+     * @param objectName Name of the object to be removed.
+     * 
+     * @return The object that was removed.
      */
-    public void removeObject(String objectName) {
-        objects.remove(objectName);
+    public InteractiveObject removeObject(String objectName) {
+        return objects.remove(objectName);
     }
 
     /**

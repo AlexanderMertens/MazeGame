@@ -1,7 +1,6 @@
 package maze_game.gameobjects.interactive;
 
 import maze_game.gameobjects.GameObject;
-import maze_game.state.GameState;
 
 /**
  * This class represents an object in the game world that the player can
@@ -78,5 +77,5 @@ public abstract class InteractiveObject extends GameObject {
         return getName() + ": " + getDescription();
     }
 
-    public abstract void interact(GameState gameState);
+    public abstract void interact();
 }

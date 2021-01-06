@@ -20,13 +20,11 @@ public enum Flag {
     OPENED("You have unlocked the door.", true), WRONG_KEY("You do not have the right key in inventory.", false),
     UNLOCKED("This door is already unlocked.", false),
 
-    // interacting
-    INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no object with that name.", false),
-
-    // moving items
-    NO_ITEM("There's no such item.", false), ITEM_MOVED("The item has been moved", true),
-    NO_ITEM_INV("There's no such item in your inventory.", false),
-    NO_ITEM_ROOM("There's no such item in the room", false),
+    // interacting and moving objects
+    INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no such object.", false),
+    NO_OBJECT_ROOM("There's no object with that name in the room.", false),
+    OBJECT_MOVED("The object has been moved", true),
+    NO_OBJECT_PARTY("There's no object with that name in the party.", false),
 
     // back
     NO_HISTORY("You do not have any previously visited locations.", false);

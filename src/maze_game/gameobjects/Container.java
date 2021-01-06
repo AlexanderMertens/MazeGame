@@ -77,9 +77,9 @@ public abstract class Container extends GameObject {
         Item item = removeItem(itemName);
         if (item != null) {
             other.addItem(item);
-            return Flag.ITEM_MOVED;
+            return Flag.OBJECT_MOVED;
         } else {
-            return Flag.NO_ITEM;
+            return Flag.NO_OBJECT;
         }
     }
 
