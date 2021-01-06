@@ -9,6 +9,13 @@ package maze_game.gameobjects;
  * @author Alexander Mertens
  */
 public class Player extends Container {
+    private static final int MAX_HEALTH = 10;
+    private static final int MIN_HEALTH = 0;
+
+    // An integer representing the health of the player.
+    // If the player's health is at or below MIN_HEALTH, the player is dead.
+    private int health;
+
     /**
      * Creates an instance of Player with given name and description.
      * 
@@ -17,6 +24,7 @@ public class Player extends Container {
      */
     public Player(String name, String description) {
         super(name, description);
+        this.health = MAX_HEALTH;
     }
 
     /**
@@ -43,6 +51,22 @@ public class Player extends Container {
         } else {
             return super.findDescription(objectName);
         }
+    }
+
+    /**
+     * This method represents the player getting hurt by something in the game
+     * world. Decrements the player's health by 1.
+     */
+    public void getHit() {
+        this.health--;
+    }
+
+    /**
+     * @return Returns true if the player's health is at or below MIN_HEALTH, i.e.
+     *         the player's dead, else it returns false.
+     */
+    public boolean isDead() {
+        return this.health <= MIN_HEALTH;
     }
 
 }
