@@ -204,6 +204,7 @@ public class GameState {
         if (object == null) {
             return Flag.NO_OBJECT_ROOM;
         } else if (!object.isRemovable()) {
+            room.addInteractive(object);
             return Flag.IMMOVABLE;
         }
         addInteractive(object);
