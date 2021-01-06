@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
         commandWords = "";
         for (CommandWord commandWord : CommandWord.values()) {
             if (commandWord != CommandWord.UNKNOWN) {
-                commandWords += commandWord.toString();
+                commandWords += " " + commandWord.toString();
             }
         }
     }

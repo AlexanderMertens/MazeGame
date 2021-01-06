@@ -257,12 +257,27 @@ public class GameState {
      *         in, its contents and the contents of the player's inventory.
      */
     public String getStateDescription() {
-        String result = currentRoom.getLongDescription() + "\n";
+        return currentRoom.getLongDescription() + "\n" + currentRoom.getExitsString();
+    }
+
+    /**
+     * @return Returns a String containing descriptions of everything in the party
+     *         and everything in the inventory.
+     */
+    public String getPartyDescription() {
+        String description = "";
         if (!player.isInventoryEmpty()) {
-            result += player.getLongDescription() + "\n";
+            description += player.getLongDescription();
         }
-        result += currentRoom.getExitsString() + "\n";
-        return result;
+
+        if (!objects.isEmpty()) {
+            description += "In the party:\n" + objects.getDescription();
+        }
+
+        if (description.equals("")) {
+            description = "You are all alone in the party.\n";
+        }
+        return description;
     }
 
     /**
@@ -275,9 +290,16 @@ public class GameState {
      * @return The description of the object with name objectName;
      */
     public String findDescription(String objectName) {
+        if (objectName.equals("party")) {
+            return getPartyDescription();
+        }
+
         String description = player.findDescription(objectName);
         if (description == null) {
             description = currentRoom.findDescription(objectName);
+        }
+        if (description == null) {
+            description = objects.findDescription(objectName);
         }
         return description;
     }

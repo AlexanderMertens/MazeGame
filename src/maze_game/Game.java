@@ -105,7 +105,7 @@ public class Game {
         InteractiveObject phil = new Character("phil", "A tall man", "Hello!", "Where are we going?");
         theater.addInteractive(phil);
 
-        Player player = new Player("Alexander", "");
+        Player player = new Player("Alexander", "Beautiful");
         ArrayList<InteractiveObject> characterList = new ArrayList<>();
         characterList.add(phil);
         gameState = new GameState(player, outside);
@@ -125,7 +125,9 @@ public class Game {
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
+            System.out.println("------------------------------------------------------------");
             finished = command.execute(gameState) || victoryCondition.isSatisfied() || loseCondition.isSatisfied();
+            System.out.println("------------------------------------------------------------");
         }
         if (loseCondition.isSatisfied()) {
             loseCondition.printMessage();

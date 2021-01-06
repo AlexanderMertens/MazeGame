@@ -59,12 +59,12 @@ public class Room extends Container {
      * @return Returns a String describing the room and its contents.
      */
     public String getLongDescription() {
-        String result = "\nYou are in " + getName() + ".\n" + getDescription();
+        String result = "You are in " + getName() + ".\n" + getDescription();
         if (!isInventoryEmpty()) {
             result += "\n" + getInventoryString();
         }
         if (hasObjects()) {
-            result += "Interactive objects:\n" + objects.getDescription();
+            result += "\nInteractive objects:" + objects.getDescription();
         }
         return result;
     }
@@ -73,14 +73,14 @@ public class Room extends Container {
      * @return Returns a String with all the possible exits of the room.
      */
     public String getExitsString() {
-        return "There are exits in the directions:" + exits.getKeyDescription();
+        return "There are exits in the directions: " + exits.getKeyDescription();
     }
 
     /**
      * @return Returns a String with the contents of the room.
      */
     public String getInventoryString() {
-        return getName() + " contents:\n" + super.getLongDescription();
+        return getName() + " contents:" + super.getLongDescription();
     }
 
     /**

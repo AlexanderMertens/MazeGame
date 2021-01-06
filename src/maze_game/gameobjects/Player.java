@@ -32,7 +32,11 @@ public class Player extends Container {
      */
     @Override
     public String getLongDescription() {
-        return getName() + " inventory:\n" + super.getLongDescription();
+        if (!isInventoryEmpty()) {
+            return getName() + " inventory:" + super.getLongDescription() + "\n";
+        } else {
+            return "Inventory is empty.\n";
+        }
     }
 
     /**
@@ -48,6 +52,8 @@ public class Player extends Container {
     public String findDescription(String objectName) {
         if (objectName.equals("player")) {
             return getDescription();
+        } else if (objectName.equals("inventory")) {
+            return getLongDescription();
         } else {
             return super.findDescription(objectName);
         }

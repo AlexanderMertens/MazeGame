@@ -107,7 +107,7 @@ public class GameObjectMap<K, V extends GameObject> {
     public String getDescription() {
         String result = "";
         for (V object : objectMap.values()) {
-            result += "  " + object.getLongDescription();
+            result += "\n  " + object.getLongDescription();
         }
         return result;
     }
