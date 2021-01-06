@@ -11,4 +11,9 @@ public class Item extends GameObject {
     public double getWeight() {
         return this.weight;
     }
+
+    @Override
+    public String getLongDescription() {
+        return getName() + " has weight of " + getWeight();
+    }
 }

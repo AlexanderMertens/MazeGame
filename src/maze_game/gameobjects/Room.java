@@ -1,9 +1,9 @@
 package maze_game.gameobjects;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import maze_game.directions.Direction;
+import maze_game.gameobjects.interactive.InteractiveObject;
+import maze_game.mapping.GameObjectMap;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * The Room class models a GameObject that represents a single room in the maze.
@@ -16,7 +16,10 @@ import maze_game.directions.Direction;
  * @author Alexander Mertens
  */
 public class Room extends Container {
-    private Map<Direction, Door> exits;
+    // A map of all exits
+    private GameObjectMap<Direction, Door> exits;
+    // A map of all objects in the room that the player can interact with.
+    private GameObjectMapByName<InteractiveObject> objects;
 
     /**
      * Constructs an empty room with no exits.
@@ -26,7 +29,8 @@ public class Room extends Container {
      */
     public Room(String name, String description) {
         super(name, description);
-        exits = new HashMap<>();
+        exits = new GameObjectMap<>();
+        objects = new GameObjectMapByName<>();
     }
 
     /**
@@ -54,10 +58,13 @@ public class Room extends Container {
     /**
      * @return Returns a String describing the room and its contents.
      */
-    public String getRoomString() {
+    public String getLongDescription() {
         String result = "\nYou are in " + getName() + ".\n" + getDescription();
-        if (!isEmpty()) {
+        if (!isInventoryEmpty()) {
             result += "\n" + getInventoryString();
+        }
+        if (hasObjects()) {
+            result += "Interactive objects:\n" + objects.getDescription();
         }
         return result;
     }
@@ -66,19 +73,14 @@ public class Room extends Container {
      * @return Returns a String with all the possible exits of the room.
      */
     public String getExitsString() {
-        String result = "There are exits in the directions:";
-        for (Direction direction : exits.keySet()) {
-            result += "  " + direction.toString();
-        }
-        return result;
+        return "There are exits in the directions:" + exits.getKeyDescription();
     }
 
     /**
      * @return Returns a String with the contents of the room.
      */
-    @Override
     public String getInventoryString() {
-        return getName() + " contents:\n" + super.getInventoryString();
+        return getName() + " contents:\n" + super.getLongDescription();
     }
 
     /**
@@ -91,13 +93,61 @@ public class Room extends Container {
         if (description != null) {
             return description;
         }
+        description = objects.findDescription(objectName);
+        if (description != null) {
+            return description;
+        }
 
         Direction direction = Direction.convertString(objectName);
-        Door door = getExit(direction);
-        if (door != null) {
-            return door.getDescription();
-        } else {
-            return null;
+        description = exits.findDescription(direction);
+        return description;
+    }
+
+    /**
+     * Adds object to the object map, if there's no object with that name in the map
+     * already.
+     * 
+     * @param object The object to be added.
+     */
+    public void addInteractive(InteractiveObject object) {
+        if (!hasObject(object.getName())) {
+            objects.put(object.getName(), object);
         }
+    }
+
+    /**
+     * Returns the InteractiveObject corresponding to the given objectName.
+     * 
+     * @param objectName Name of the object.
+     * @return The corresponding InteractiveObject.
+     */
+    public InteractiveObject getObject(String objectName) {
+        return objects.get(objectName);
+    }
+
+    /**
+     * Removes the object with the given name from the contents of the room if
+     * there's such an object.
+     * 
+     * @param objectName
+     */
+    public void removeObject(String objectName) {
+        objects.remove(objectName);
+    }
+
+    /**
+     * @param objectName Name of the object.
+     * @return Returns true if the room contains an object with the given
+     *         objectName.
+     */
+    public boolean hasObject(String objectName) {
+        return objects.containsKey(objectName);
+    }
+
+    /**
+     * @return Returns true if the rooms contains any InteractiveObject.
+     */
+    public boolean hasObjects() {
+        return !objects.isEmpty();
     }
 }
