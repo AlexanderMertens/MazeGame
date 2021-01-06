@@ -1,7 +1,6 @@
 package maze_game.gameobjects;
 
-import java.util.HashMap;
-import java.util.Map;
+import maze_game.mapping.GameObjectMapByName;
 
 /**
  * The Container class models a GameObject that can contain items. It extends
@@ -14,7 +13,7 @@ import java.util.Map;
  * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
-    private Map<String, Item> inventory;
+    private GameObjectMapByName<Item> inventory;
 
     /**
      * Constructs an empty container with given name and description.
@@ -24,7 +23,7 @@ public abstract class Container extends GameObject {
      */
     public Container(String name, String description) {
         super(name, description);
-        inventory = new HashMap<>();
+        inventory = new GameObjectMapByName<>();
     }
 
     /**
@@ -33,7 +32,7 @@ public abstract class Container extends GameObject {
      * @param item Item to be added.
      */
     public void addItem(Item item) {
-        inventory.put(item.getName(), item);
+        inventory.add(item);
     }
 
     /**
@@ -95,19 +94,16 @@ public abstract class Container extends GameObject {
     /**
      * @return Returns true when the Container is empty, false if not.
      */
-    public boolean isEmpty() {
+    public boolean isInventoryEmpty() {
         return inventory.isEmpty();
     }
 
     /**
      * @return Returns a String representing the inventory of the GameObject.
      */
-    public String getInventoryString() {
-        String result = "";
-        for (Item item : inventory.values()) {
-            result += "  " + item.getName() + " has weight of " + item.getWeight() + "\n";
-        }
-        return result;
+    @Override
+    public String getLongDescription() {
+        return inventory.getDescription();
     }
 
     /**
@@ -124,11 +120,6 @@ public abstract class Container extends GameObject {
             return getDescription();
         }
 
-        Item item = getItem(objectName);
-        if (item == null) {
-            return null;
-        } else {
-            return item.getDescription();
-        }
+        return inventory.findDescription(objectName);
     }
 }
