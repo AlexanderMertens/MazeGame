@@ -19,8 +19,9 @@ public class BackCommand extends Command {
         Flag flag = gameState.goBack();
         if (!flag.isSuccess()) {
             flag.printMessage();
+        } else {
+            System.out.println(gameState.getStateDescription());
         }
-        System.out.println(gameState.getStateDescription());
         return false;
     }
 }
