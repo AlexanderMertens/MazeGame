@@ -21,7 +21,12 @@ public enum Flag {
     UNLOCKED("This door is already unlocked.", false),
 
     // interacting
-    INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no object with that name.", false);
+    INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no object with that name.", false),
+
+    // moving items
+    NO_ITEM("There's no such item.", false), ITEM_MOVED("The item has been moved", true),
+    NO_ITEM_INV("There's no such item in your inventory.", false),
+    NO_ITEM_ROOM("There's no such item in the room", false);
 
     private String message;
     private boolean success;

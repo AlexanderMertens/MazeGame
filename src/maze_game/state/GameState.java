@@ -9,7 +9,7 @@ import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.gameobjects.interactive.InteractiveObject;
-import maze_game.mapping.GameObjectMapByName;
+import maze_game.mapping.InteractiveObjectMapping;
 
 /**
  * Class that represents the current state of the gameworld. The class has
@@ -24,7 +24,7 @@ public class GameState {
     private Player player;
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
-    private GameObjectMapByName<InteractiveObject> objects;
+    private InteractiveObjectMapping objects;
 
     /**
      * Creates a new GameState with given player and currentRoom.
@@ -36,7 +36,25 @@ public class GameState {
         this.player = player;
         this.currentRoom = currentRoom;
         previousRooms = new Stack<>();
-        objects = new GameObjectMapByName<>();
+        objects = new InteractiveObjectMapping();
+    }
+
+    /**
+     * Attempts to move player in a certain direction. Returns false if currentRoom
+     * contains no Room in that direction. Else it moves the player in that
+     * direction, pushes the last currentRoom onto the Stack and return True.
+     * 
+     * @param directionString The direction the player wishes to move in String
+     *                        form.
+     * @return Returns a success flag if the player is successfully moved, else it
+     *         returns a flag containing a message describing what went wrong.
+     */
+    public Flag go(String directionString) {
+        if (directionString == null) {
+            return Flag.NO_ARGUMENT;
+        }
+        Direction direction = Direction.convertString(directionString);
+        return go(direction);
     }
 
     /**
@@ -48,11 +66,7 @@ public class GameState {
      * @return Returns a success flag if the player is successfully moved, else it
      *         returns a flag containing a message describing what went wrong.
      */
-    public Flag go(String directionString) {
-        if (directionString == null) {
-            return Flag.NO_ARGUMENT;
-        }
-        Direction direction = Direction.convertString(directionString);
+    public Flag go(Direction direction) {
         Door door = currentRoom.getExit(direction);
 
         if (door == null) {
@@ -88,26 +102,46 @@ public class GameState {
      * returns true. If there's no such item, it simply returns false.
      * 
      * @param itemName Name of the item to be removed from the room.
-     * @return Returns true if the item is exchanged successfully, else it return
-     *         false.
+     * @return Returns a succes Flag if the item is successfully dropped into the
+     *         room, else it returns a Flag containing a message with what went
+     *         wrong.
      */
-    public boolean playerTakes(String itemName) {
-        return player.takeItemFrom(currentRoom, itemName);
+    public Flag playerTakes(String itemName) {
+        Flag flag = player.takeItemFrom(currentRoom, itemName);
+        if (flag == Flag.NO_ITEM) {
+            return Flag.NO_ITEM_ROOM;
+        } else {
+            return flag;
+        }
     }
 
     /**
      * Looks for an Item with the name itemName in the player's inventory. If there
      * is such an item, it is removed from the inventory, put in the room's
-     * inventory and returns true. If there's no such item, it simply returns false.
+     * inventory and returns a succesfull Flag. Else it does nothing and returns a
+     * Flag containing an appropriate message.
      * 
      * @param itemName Name of the item to be removed from the player's inventory.
-     * @return Returns true if the item is exchanged successfully, else it return
-     *         false.
+     * @return Returns a succes Flag if the item is successfully dropped into the
+     *         room, else it returns a Flag containing a message with what went
+     *         wrong.
      */
-    public boolean playerDrops(String itemName) {
-        return player.giveItemTo(currentRoom, itemName);
+    public Flag playerDrops(String itemName) {
+        Flag flag = player.giveItemTo(currentRoom, itemName);
+        if (flag == Flag.NO_ITEM) {
+            return Flag.NO_ITEM_INV;
+        } else {
+            return flag;
+        }
     }
 
+    /**
+     * Attempts to unlock a door in a given direction.
+     * 
+     * @param directionString The direction of the door.
+     * @return Returns a success Flag if the door is successfully opened, else
+     *         returns a Flag containing a message with what went wrong.
+     */
     public Flag openDoor(String directionString) {
         if (directionString == null) {
             return Flag.NO_ARGUMENT;
@@ -152,6 +186,13 @@ public class GameState {
         currentRoom.removeObject(objectName);
     }
 
+    /**
+     * Attempts interact with an object with the given objectName.
+     * 
+     * @param objectName Name of the object to be interacted with.
+     * @return Returns a success Flag if the object is successfully interacted with,
+     *         else returns a Flag containing a message with what went wrong.
+     */
     public Flag interact(String objectName) {
         if (objectName == null) {
             return Flag.NO_ARGUMENT;

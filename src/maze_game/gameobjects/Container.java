@@ -1,5 +1,6 @@
 package maze_game.gameobjects;
 
+import maze_game.flag.Flag;
 import maze_game.mapping.Inventory;
 
 /**
@@ -66,15 +67,19 @@ public abstract class Container extends GameObject {
      * @param other    Container object to which the item is given to.
      * @param itemName The name of the item to be exchanged.
      * 
-     * @return Returns true if this container contains the item.
+     * @return Returns a Flag containing a message with what happened.
      */
-    public boolean giveItemTo(Container other, String itemName) {
+    public Flag giveItemTo(Container other, String itemName) {
+        if (itemName == null) {
+            return Flag.NO_ARGUMENT;
+        }
+
         Item item = removeItem(itemName);
         if (item != null) {
             other.addItem(item);
-            return true;
+            return Flag.ITEM_MOVED;
         } else {
-            return false;
+            return Flag.NO_ITEM;
         }
     }
 
@@ -85,9 +90,9 @@ public abstract class Container extends GameObject {
      * @param other    Container object from which the item is taken.
      * @param itemName The name of the item to be exchanged.
      * 
-     * @return Returns true if the other container contains the item.
+     * @return Returns a Flag containing a message with what happened.
      */
-    public boolean takeItemFrom(Container other, String itemName) {
+    public Flag takeItemFrom(Container other, String itemName) {
         return other.giveItemTo(this, itemName);
     }
 

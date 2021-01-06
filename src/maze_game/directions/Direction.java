@@ -7,7 +7,31 @@ package maze_game.directions;
  * @author Alexander Mertens
  */
 public enum Direction {
-    NORTH("north"), WEST("west"), EAST("east"), SOUTH("south"), UNKNOWN("?");
+    NORTH("north") {
+        public Direction reverse() {
+            return SOUTH;
+        }
+    },
+    WEST("west") {
+        public Direction reverse() {
+            return EAST;
+        }
+    },
+    EAST("east") {
+        public Direction reverse() {
+            return WEST;
+        }
+    },
+    SOUTH("south") {
+        public Direction reverse() {
+            return NORTH;
+        }
+    },
+    UNKNOWN("?") {
+        public Direction reverse() {
+            return UNKNOWN;
+        }
+    };
 
     private String directionString;
 
@@ -28,6 +52,8 @@ public enum Direction {
             return Direction.UNKNOWN;
         }
     }
+
+    public abstract Direction reverse();
 
     public String toString() {
         return this.directionString;
