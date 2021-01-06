@@ -1,5 +1,6 @@
 package maze_game.commands;
 
+import maze_game.flag.Flag;
 import maze_game.state.GameState;
 
 /**
@@ -15,9 +16,9 @@ public class BackCommand extends Command {
 
     @Override
     public boolean execute(GameState gameState) {
-        if (!gameState.goBack()) {
-            System.out.println("You can't go back, you are already at the beginning!");
-            return false;
+        Flag flag = gameState.goBack();
+        if (!flag.isSuccess()) {
+            flag.printMessage();
         }
         System.out.println(gameState.getStateDescription());
         return false;

@@ -20,7 +20,9 @@ import maze_game.mapping.InteractiveObjectMapping;
  */
 public class GameState {
     private Room currentRoom;
-    private Stack<Room> previousRooms;
+    // Holds Stack with the previous directions the player went with
+    // Used to reconstruct the player's path
+    private Stack<Direction> previousDirections;
     private Player player;
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
@@ -35,14 +37,15 @@ public class GameState {
     public GameState(Player player, Room currentRoom) {
         this.player = player;
         this.currentRoom = currentRoom;
-        previousRooms = new Stack<>();
+        previousDirections = new Stack<>();
         objects = new InteractiveObjectMapping();
     }
 
     /**
-     * Attempts to move player in a certain direction. Returns false if currentRoom
-     * contains no Room in that direction. Else it moves the player in that
-     * direction, pushes the last currentRoom onto the Stack and return True.
+     * Attempts to move player in a certain direction. Returns appropriate Flag if
+     * currentRoom contains no Room in that direction. Else it moves the player in
+     * that direction, pushes the direction onto the Stack and returns a success
+     * Flag.
      * 
      * @param directionString The direction the player wishes to move in String
      *                        form.
@@ -54,13 +57,17 @@ public class GameState {
             return Flag.NO_ARGUMENT;
         }
         Direction direction = Direction.convertString(directionString);
-        return go(direction);
+        Flag flag = go(direction);
+        if (flag.isSuccess()) {
+            previousDirections.push(direction);
+        }
+        return flag;
     }
 
     /**
-     * Attempts to move player in a certain direction. Returns false if currentRoom
-     * contains no Room in that direction. Else it moves the player in that
-     * direction, pushes the last currentRoom onto the Stack and return True.
+     * Attempts to move player in a certain direction. Returns an appropriate Flag
+     * if currentRoom contains no Room in that direction. Else it moves the player
+     * in that direction and returns a success Flag.
      * 
      * @param direction The direction the player wishes to move.
      * @return Returns a success flag if the player is successfully moved, else it
@@ -74,25 +81,29 @@ public class GameState {
         } else if (door.isLocked()) {
             return Flag.LOCKED;
         } else {
-            previousRooms.push(currentRoom);
             setCurrentRoom(door.getRoom());
             return Flag.MOVED;
         }
     }
 
     /**
-     * Attempts to move the player to the previously visited location and returns
-     * true if succesfull. If there's no last known location, the method does
-     * nothing and return false.
+     * Attempts to move the player to the previously visited location and returns a
+     * success Flag if succesfull. If there's no last known location, the method
+     * does nothing and returns a Flag with appropriate message.
      * 
-     * @return Returns true if the player went back to the previous location.
+     * @return Returns a success flag if the player is successfully moved, else it
+     *         returns a flag containing a message describing what went wrong.
      */
-    public boolean goBack() {
-        if (!previousRooms.isEmpty()) {
-            setCurrentRoom(previousRooms.pop());
-            return true;
+    public Flag goBack() {
+        if (previousDirections.isEmpty()) {
+            return Flag.NO_HISTORY;
         } else {
-            return false;
+            // Takes the last known direction from the stack and reverses it to reverse path
+            Flag flag = go(previousDirections.peek().reverse());
+            if (flag.isSuccess()) {
+                previousDirections.pop();
+            }
+            return flag;
         }
     }
 

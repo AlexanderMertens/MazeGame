@@ -26,7 +26,10 @@ public enum Flag {
     // moving items
     NO_ITEM("There's no such item.", false), ITEM_MOVED("The item has been moved", true),
     NO_ITEM_INV("There's no such item in your inventory.", false),
-    NO_ITEM_ROOM("There's no such item in the room", false);
+    NO_ITEM_ROOM("There's no such item in the room", false),
+
+    // back
+    NO_HISTORY("You do not have any previously visited locations.", false);
 
     private String message;
     private boolean success;
