@@ -93,4 +93,15 @@ public class GameObjectMap<K, V extends GameObject> {
         }
         return result;
     }
+
+    /**
+     * @return Returns a String containing all the keys in the mapping.
+     */
+    public String getKeyDescription() {
+        String result = "";
+        for (K key : objectMap.keySet()) {
+            result += key.toString() + " ";
+        }
+        return result;
+    }
 }
