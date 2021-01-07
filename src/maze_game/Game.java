@@ -289,11 +289,9 @@ public class Game {
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
-            System.out.println(
-                    "------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
             finished = command.execute(gameState) || victoryCondition.isSatisfied() || loseCondition.isSatisfied();
-            System.out.println(
-                    "------------------------------------------------------------------------------------------------------------------------");
+            System.out.println();
         }
         if (loseCondition.isSatisfied()) {
             loseCondition.printMessage();
@@ -314,11 +312,14 @@ public class Game {
         System.out.println("***************************************************");
         System.out.println("*                MAZE OF ASTAROTH                 *");
         System.out.println("***************************************************");
+        System.out.println("Your friends have been trapped by the evil wizard Astaroth in his puzzle maze!");
+        System.out.println("Go to this maze and rescue them!");
+        System.out.println();
         System.out.println("The goal of the game is to rescue you your friends from the maze.");
         System.out.println("Many obstacles will hinder you from completing the game.");
         System.out.println("You need to find all the key objects to open any locked doors.");
-        System.out.println("There are also a variety of puzzles strewn about the maze, that you need to solve.");
-        System.out.println("The puzzles are also trapped,");
+        System.out.println("There are also a few puzzles that you need to solve.");
+        System.out.println("The puzzles are trapped,");
         System.out.println("so don't get the answer wrong too many times or you will lose!");
         System.out.println("Once you get all your friends back to the exit, you have won!");
         System.out.println("Type " + CommandWord.HELP.toString() + " if you need help.");
