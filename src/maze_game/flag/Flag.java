@@ -22,6 +22,7 @@ public enum Flag {
 
     // interacting and moving objects
     INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no such object.", false),
+    NO_INTERACTIVE("There's no such object that you can interact with.", false),
     NO_OBJECT_ROOM("There's no object with that name in the room.", false),
     OBJECT_MOVED("The object has been moved", true),
     NO_OBJECT_PARTY("There's no object with that name in the party.", false),

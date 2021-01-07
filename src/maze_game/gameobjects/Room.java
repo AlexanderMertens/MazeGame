@@ -59,7 +59,7 @@ public class Room extends Container {
      * @return Returns a String describing the room and its contents.
      */
     public String getLongDescription() {
-        String result = "You are in the " + getName() + ".\n" + getDescription();
+        String result = "You are in the " + getName() + ".\n\n" + getDescription() + "\n";
         if (!isInventoryEmpty()) {
             result += "\n" + getInventoryString();
         }

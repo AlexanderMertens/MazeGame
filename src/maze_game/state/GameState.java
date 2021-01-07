@@ -121,6 +121,10 @@ public class GameState {
      *         wrong.
      */
     public Flag playerTakes(String objectName) {
+        if (objectName == null) {
+            return Flag.NO_ARGUMENT;
+        }
+
         Flag flag = player.takeItemFrom(currentRoom, objectName);
         if (!flag.isSuccess()) {
             flag = this.moveObjectFrom(currentRoom, objectName);
@@ -173,6 +177,7 @@ public class GameState {
                 return Flag.WRONG_KEY;
             } else {
                 door.unlock(item);
+                player.removeItem(item.getName());
                 return Flag.OPENED;
             }
         }
@@ -246,7 +251,7 @@ public class GameState {
         }
 
         if (object == null) {
-            return Flag.NO_OBJECT;
+            return Flag.NO_INTERACTIVE;
         }
 
         return object.interact(this);
@@ -271,7 +276,7 @@ public class GameState {
         }
 
         if (!objects.isEmpty()) {
-            description += "In the party:\n" + objects.getDescription();
+            description += "\nIn the party:" + objects.getDescription();
         }
 
         if (description.equals("")) {

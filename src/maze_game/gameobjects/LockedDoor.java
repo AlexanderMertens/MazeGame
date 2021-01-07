@@ -9,19 +9,23 @@ package maze_game.gameobjects;
  */
 public class LockedDoor extends Door {
     private GameObject keyObject;
+    // Description of the door when it is closed.
+    private String closedDescription;
     private boolean locked;
 
     /**
      * Constructs a LockedDoor with given name and description. At first the door is
      * locked.
      * 
-     * @param name        Name of the door.
-     * @param description Description of the door.
-     * @param room        The room the door leads to.
-     * @param keyItem     The item that can open the door.
+     * @param name              Name of the door.
+     * @param openDescription   Description of the door when it is opened.
+     * @param closedDescription Description of the door when it is locked.
+     * @param room              The room the door leads to.
+     * @param keyItem           The item that can open the door.
      */
-    public LockedDoor(String name, String description, Room room, GameObject keyObject) {
-        super(name, description, room);
+    public LockedDoor(String name, String openDescription, String closedDescription, Room room, GameObject keyObject) {
+        super(name, openDescription, room);
+        this.closedDescription = closedDescription;
         this.keyObject = keyObject;
         this.locked = true;
     }
@@ -72,5 +76,18 @@ public class LockedDoor extends Door {
     @Override
     public boolean isKey(GameObject object) {
         return this.keyObject == object;
+    }
+
+    /**
+     * @return Returns a different description of the door depending on whether it
+     *         is open or closed.
+     */
+    @Override
+    public String getDescription() {
+        if (isLocked()) {
+            return closedDescription;
+        } else {
+            return super.getDescription();
+        }
     }
 }

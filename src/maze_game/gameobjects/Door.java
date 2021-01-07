@@ -2,8 +2,10 @@ package maze_game.gameobjects;
 
 /**
  * This class represents doorways in the maze game. Doors are one way only, they
- * only hold the room that they lead to. Doors can also be locked by some key
- * item. By default a door is unlocked and has no key item.
+ * only hold the room that they lead to. A door leading from one room to
+ * another, doesn't not mean necessarily mean a door in the reverse direction
+ * exists. Doors can also be locked by some key item. By default a door is
+ * unlocked and has no key item.
  */
 public class Door extends GameObject {
 

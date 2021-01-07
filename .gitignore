@@ -1,3 +1,4 @@
 *.uxf
 .DS_Store
 instructies.txt
+.vscode/
