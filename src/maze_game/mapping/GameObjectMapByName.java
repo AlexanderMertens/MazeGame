@@ -14,6 +14,6 @@ public class GameObjectMapByName<T extends GameObject> extends GameObjectMap<Str
      * @param object The object to be added.
      */
     public void add(T object) {
-        put(object.getName(), object);
+        put(object.getName().toLowerCase(), object);
     }
 }

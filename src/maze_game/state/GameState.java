@@ -190,7 +190,7 @@ public class GameState {
      * @param object The object to be added.
      */
     public void addInteractive(InteractiveObject object) {
-        objects.put(object.getName(), object);
+        objects.add(object);
     }
 
     /**

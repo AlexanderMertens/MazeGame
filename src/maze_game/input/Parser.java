@@ -48,11 +48,12 @@ public class Parser {
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);
         if (tokenizer.hasNext()) {
-            commandWord = commands.getCommandWord(tokenizer.next()); // get first word
+            commandWord = commands.getCommandWord(tokenizer.next().toLowerCase()); // get first word
             if (tokenizer.hasNext()) {
                 argument = tokenizer.next();
                 while (tokenizer.hasNext())
                     argument += " " + tokenizer.next(); // get argument
+                argument = argument.toLowerCase();
             }
         }
         tokenizer.close();

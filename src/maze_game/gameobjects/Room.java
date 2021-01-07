@@ -110,8 +110,8 @@ public class Room extends Container {
      * @param object The object to be added.
      */
     public void addInteractive(InteractiveObject object) {
-        if (!hasObject(object.getName())) {
-            objects.put(object.getName(), object);
+        if (!hasObject(object.getName().toLowerCase())) {
+            objects.add(object);
         }
     }
 
