@@ -9,7 +9,7 @@ package maze_game.gameobjects;
  * @author Alexander Mertens
  */
 public class Player extends Container {
-    private static final int MAX_HEALTH = 10;
+    private static final int MAX_HEALTH = 5;
     private static final int MIN_HEALTH = 0;
 
     // An integer representing the health of the player.
