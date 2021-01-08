@@ -53,6 +53,9 @@ public enum Direction {
         }
     }
 
+    /**
+     * @return Returns the direction opposite to this one.
+     */
     public abstract Direction reverse();
 
     public String toString() {

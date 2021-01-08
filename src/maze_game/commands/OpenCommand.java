@@ -5,7 +5,8 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed tries to open a door with a key item in the
- * player's inventory.
+ * player's inventory. Prints out a Flag message if the execution of the command
+ * has failed.
  * 
  * @author Alexander Mertens
  */

@@ -30,9 +30,19 @@ public class LockMechanism extends LinkedMechanism {
         }
     }
 
+    /**
+     * The mechanism is set to active if all the previous mechanisms in the link
+     * have been set to active.
+     * 
+     * If the mechanism is successfully activated, unlock the door(s) connected to
+     * it.
+     * 
+     * @return Returns an appropriate Flag with a message describing failure or
+     *         success.
+     */
     public Flag interact(GameState gameState) {
         Flag flag = super.interact(gameState);
-        if (hasInteracted()) {
+        if (isActive()) {
             if (door1 != null) {
                 door1.unlock(this);
             }

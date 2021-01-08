@@ -5,7 +5,8 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed instructs gameState to remove an item from the
- * player's inventory and into the room.
+ * player's inventory and into the room. Prints out a Flag message if the
+ * execution failed.
  * 
  * @author Alexander Mertens
  */

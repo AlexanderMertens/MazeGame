@@ -6,6 +6,9 @@ import maze_game.state.GameState;
  * This class represents a command that is given by the player and executed by
  * game.
  * 
+ * Subclasses must implement the abstract execute command, such that the command
+ * can be executed.
+ * 
  * @author Alexander Mertens
  */
 public abstract class Command {

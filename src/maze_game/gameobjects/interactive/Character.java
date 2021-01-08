@@ -25,14 +25,15 @@ public class Character extends InteractiveObject {
     }
 
     /**
-     * The player "talks" to the character, character responds with some dialogue.
-     * The character remembers if the player has already met them.
+     * When the player interacts with the character, the character prints out some
+     * dialogue. If the player hasn't interacted with the character yet, the initial
+     * dialogue is printed. Otherwise it defaults to the default dialogue.
      */
     public Flag interact(GameState gameState) {
         System.out.println(getDialogue());
 
-        if (!hasInteracted()) {
-            setHasInteracted();
+        if (!isActive()) {
+            activate();
         }
         return Flag.INTERACTED;
     }

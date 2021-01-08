@@ -20,7 +20,7 @@ import maze_game.input.Parser;
 import maze_game.state.GameState;
 
 /**
- * This class represents the Game, initializes the state of the game and start
+ * This class represents the Game, initializes the state of the game and starts
  * the gameplay loop.
  */
 public class Game {
@@ -327,12 +327,13 @@ public class Game {
         printLocationInfo();
     }
 
+    private void printLocationInfo() {
+        System.out.println(gameState.getStateDescription());
+    }
+
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
     }
 
-    private void printLocationInfo() {
-        System.out.println(gameState.getStateDescription());
-    }
 }

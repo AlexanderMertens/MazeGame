@@ -14,6 +14,9 @@ public class LoseCondition extends Condition {
         this.player = player;
     }
 
+    /**
+     * Returns true if the player is dead, i.e. their hitpoints are at 0.
+     */
     public boolean isSatisfied() {
         return player.isDead();
     }

@@ -5,7 +5,8 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed instructs gameState to interact with the given
- * object in the argument of the command.
+ * object in the argument of the command. Prints out a Flag message if the
+ * execution of the command has failed.
  * 
  * @author Alexander Mertens
  */

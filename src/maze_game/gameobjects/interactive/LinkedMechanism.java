@@ -25,17 +25,26 @@ public class LinkedMechanism extends InteractiveObject {
         this.trapped = trapped;
     }
 
-    public void resetHasInteracted() {
-        super.resetHasInteracted();
-        resetPrevious();
-    }
-
+    /**
+     * The player interacts with the mechanism and the mechanism responds
+     * appropriately.
+     * 
+     * If the the mechanism has already been activated, the method does nothing and
+     * returns a Flag containing the message that the interaction had no effect.
+     * 
+     * If the previous mechanism has been activated or if the mechanism has no
+     * previous mechanism, the mechanism is activated. If the mechanism has a
+     * previous mechanism, but it isn't activated, all the mechanisms in the
+     * sequence reset and if it's trapped, the player is hurt. At last it prints out
+     * the appropriate dialogue depending on whether it's active or not and returns
+     * a success Flag.
+     */
     public Flag interact(GameState gameState) {
-        if (hasInteracted()) {
+        if (isActive()) {
             return Flag.NO_EFFECT;
         }
-        if (!hasPrevious() || (hasPrevious() && previousMechanism.hasInteracted())) {
-            setHasInteracted();
+        if (!hasPrevious() || previousMechanism.isActive()) {
+            activate();
         } else {
             if (trapped) {
                 gameState.getHit();
@@ -46,9 +55,18 @@ public class LinkedMechanism extends InteractiveObject {
         return Flag.INTERACTED;
     }
 
+    /**
+     * Resets the mechanism along with the previous mechanism in the link if there
+     * is one.
+     */
+    public void reset() {
+        super.reset();
+        resetPrevious();
+    }
+
     private void resetPrevious() {
         if (hasPrevious()) {
-            previousMechanism.resetHasInteracted();
+            previousMechanism.reset();
         }
     }
 

@@ -24,13 +24,14 @@ public abstract class InteractiveObject extends GameObject {
     private String initialDialogue;
     // Dialogue the player gets when interacting with the object again.
     private String defaultDialogue;
-    // Records whether the player has interacted with the object.
-    private boolean hasInteracted;
+    // Records whether the player has activated the object.
+    private boolean active;
     // Records whether the player is allowed to remove this from the room.
     private boolean removable;
 
     /**
-     * Creates a character with given name, description and dialogue.
+     * Creates a character with given name, description and dialogue. Initially sets
+     * the object to inactive.
      * 
      * @param name            Name of object.
      * @param description     Description of object.
@@ -42,25 +43,35 @@ public abstract class InteractiveObject extends GameObject {
         super(name, description);
         this.initialDialogue = initialDialogue;
         this.defaultDialogue = defaultDialogue;
-        this.hasInteracted = false;
+        this.active = false;
         this.removable = removable;
     }
 
     /**
-     * @return Returns true if the player has already interacted with the object.
+     * @return Returns true if the player has already activated with the object.
      */
-    public boolean hasInteracted() {
-        return hasInteracted;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setHasInteracted() {
-        this.hasInteracted = true;
+    /**
+     * Records that the player has activated the object.
+     */
+    public void activate() {
+        this.active = true;
     }
 
-    public void resetHasInteracted() {
-        this.hasInteracted = false;
+    /**
+     * Records that the object has been reset, setting it to inactive.
+     */
+    public void reset() {
+        this.active = false;
     }
 
+    /**
+     * @return Returns true if the object is allowed to be removed from the room it
+     *         is in.
+     */
     public boolean isRemovable() {
         return this.removable;
     }
@@ -72,7 +83,7 @@ public abstract class InteractiveObject extends GameObject {
      * @return A String containing the appropriate dialogue.
      */
     public String getDialogue() {
-        if (hasInteracted()) {
+        if (isActive()) {
             return defaultDialogue;
         } else {
             return initialDialogue;
@@ -87,5 +98,12 @@ public abstract class InteractiveObject extends GameObject {
         return getName() + ": " + getDescription();
     }
 
+    /**
+     * The player interacts with the object and the object responds in some way by
+     * e.g. printing out dialogue, opening a door, harming the player, etc.
+     * 
+     * @param gameState The state of the game that the object can influence.
+     * @return Returns a Flag representing succes or failure and carrying a message.
+     */
     public abstract Flag interact(GameState gameState);
 }

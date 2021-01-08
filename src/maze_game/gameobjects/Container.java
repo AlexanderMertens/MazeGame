@@ -14,6 +14,7 @@ import maze_game.mapping.GameObjectMapByName;
  * @author Alexander Mertens
  */
 public abstract class Container extends GameObject {
+    // A map of the name of an item to the item objects in the room.
     private GameObjectMapByName<Item> inventory;
 
     /**

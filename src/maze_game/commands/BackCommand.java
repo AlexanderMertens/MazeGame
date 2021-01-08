@@ -5,7 +5,7 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed instructs gameState to move the player back to the
- * previous room.
+ * previous room. If the command failed, it prints out a Flag message.
  * 
  * @author Alexander Mertens
  */

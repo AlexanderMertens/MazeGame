@@ -5,7 +5,7 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed instructs the gameState to move the player in a
- * given direction.
+ * given direction. Prints out a Flag message if the execution failed.
  * 
  * @author Alexander Mertens
  */
