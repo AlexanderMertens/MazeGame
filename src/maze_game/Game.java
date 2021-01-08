@@ -323,7 +323,8 @@ public class Game {
         System.out.println("so don't get the answer wrong too many times or you will lose!");
         System.out.println("Once you get all your friends back to the exit, you have won!");
         System.out.println("Type " + CommandWord.HELP.toString() + " if you need help.");
-        System.out.println();
+        System.out
+                .println("------------------------------------------------------------------------------------------");
         printLocationInfo();
     }
 

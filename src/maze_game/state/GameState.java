@@ -9,6 +9,7 @@ import maze_game.gameobjects.Item;
 import maze_game.gameobjects.Player;
 import maze_game.gameobjects.Room;
 import maze_game.gameobjects.interactive.InteractiveObject;
+import maze_game.hint.Hints;
 import maze_game.mapping.GameObjectMapByName;
 
 /**
@@ -29,6 +30,8 @@ public class GameState {
     // A mapping of characters and objects that are in the party
     // The player can interact with these via the interact command
     private GameObjectMapByName<InteractiveObject> objects;
+    // Holds hints for the player
+    private Hints hints;
 
     /**
      * Creates a new GameState with given player and currentRoom.
@@ -41,6 +44,7 @@ public class GameState {
         this.currentRoom = currentRoom;
         directionHistory = new Stack<>();
         objects = new GameObjectMapByName<>();
+        this.hints = new Hints();
     }
 
     /**
@@ -344,6 +348,13 @@ public class GameState {
      */
     public void getHit() {
         player.getHit();
+    }
+
+    /**
+     * Prints a hint for the player.
+     */
+    public void printHint() {
+        hints.printHint();
     }
 
     private void setCurrentRoom(Room newRoom) {

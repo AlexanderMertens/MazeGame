@@ -32,6 +32,8 @@ public class CommandFactory {
                 return new OpenCommand(argument);
             case INTERACT:
                 return new InteractCommand(argument);
+            case HINT:
+                return new HintCommand(argument);
             default:
                 return new UnknownCommand(argument);
         }
