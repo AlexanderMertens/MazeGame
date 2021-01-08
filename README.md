@@ -8,8 +8,6 @@ The wizard has trapped them in an ancient maze filled with traps.
 You must navigate this maze, unlock its doors and its secrets in order to find your friends.
 Bring your friends back to the entrance of the maze in order to win!
 
-## How to install and run
-
 ## How to play
 You play by entering a command word and an optional argument, seperated by a space. 
 The commands and argument are case insensitive.
