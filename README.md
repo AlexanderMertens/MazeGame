@@ -18,6 +18,7 @@ The commands and argument are case insensitive.
 | :---: | :---: | :---: |
 | help | \<any\> | Displays commands |
 | go | \<direction\> | Go in a direction |
+| back | \<any\> | Go back in the direction you came from |
 | take | \<itemName\> | Takes item from the room |
 | take | \<characterName\> | Take a character in the room with you |
 | drop | \<itemName\> | Drop an item into the room |
