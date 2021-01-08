@@ -9,11 +9,14 @@ package maze_game.gameobjects;
  * @author Alexander Mertens
  */
 public class Player extends Container {
+    // The starting health of the player
     private static final int MAX_HEALTH = 5;
+    // If the player's health reaches this value, the player dies.
     private static final int MIN_HEALTH = 0;
+    // If the player's health reaches this value, he is close to death.
+    private static final int TRESHOLD = 2 + MIN_HEALTH;
 
     // An integer representing the health of the player.
-    // If the player's health is at or below MIN_HEALTH, the player is dead.
     private int health;
 
     /**
@@ -51,7 +54,7 @@ public class Player extends Container {
     @Override
     public String findDescription(String objectName) {
         if (objectName.equals("player")) {
-            return getDescription();
+            return getPlayerState();
         } else if (objectName.equals("inventory")) {
             return getLongDescription();
         } else {
@@ -73,6 +76,20 @@ public class Player extends Container {
      */
     public boolean isDead() {
         return this.health <= MIN_HEALTH;
+    }
+
+    public String getPlayerState() {
+        String description = getDescription() + "\n";
+        if (health <= MIN_HEALTH) {
+            description += "You are dead!";
+        } else if (health <= TRESHOLD) {
+            description += "You are critically wounded, you can't take much more.";
+        } else if (health < MAX_HEALTH) {
+            description += "You have been wounded, you should be careful.";
+        } else {
+            description += "You are a picture of health.";
+        }
+        return description;
     }
 
 }
