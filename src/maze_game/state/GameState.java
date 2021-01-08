@@ -315,6 +315,8 @@ public class GameState {
     public String findDescription(String objectName) {
         if (objectName.equals("party")) {
             return getPartyDescription();
+        } else if (objectName.equals("room")) {
+            return getStateDescription();
         }
 
         String description = player.findDescription(objectName);
