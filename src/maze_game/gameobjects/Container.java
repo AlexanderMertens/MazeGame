@@ -71,10 +71,6 @@ public abstract class Container extends GameObject {
      * @return Returns a Flag containing a message with what happened.
      */
     public Flag giveItemTo(Container other, String itemName) {
-        if (itemName == null) {
-            return Flag.NO_ARGUMENT;
-        }
-
         Item item = removeItem(itemName);
         if (item != null) {
             other.addItem(item);

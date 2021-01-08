@@ -5,8 +5,7 @@ import maze_game.state.GameState;
 
 /**
  * Command that when executed instructs gameState to remove an item from the
- * player's inventory and into the room. Prints out a Flag message if the
- * execution failed.
+ * player's inventory and into the room. Prints out a Flag message.
  * 
  * @author Alexander Mertens
  */
@@ -18,9 +17,7 @@ public class DropCommand extends Command {
     @Override
     public boolean execute(GameState gameState) {
         Flag flag = gameState.playerDrops(getArgument());
-        if (!flag.isSuccess()) {
-            flag.printMessage();
-        }
+        flag.printMessage();
         return false;
     }
 }

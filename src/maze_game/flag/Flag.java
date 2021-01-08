@@ -17,14 +17,17 @@ public enum Flag {
     LOCKED("The door is locked.", false), MOVED("You have moved.", true),
 
     // opening doors
-    OPENED("You have unlocked the door.", true), WRONG_KEY("You do not have the right key in inventory.", false),
+    OPENED("The door has been opened", true), WRONG_KEY("You do not have the right key in inventory.", false),
     UNLOCKED("This door is already unlocked.", false),
 
     // interacting and moving objects
     INTERACTED("You have interacted with the object.", true), NO_OBJECT("There's no such object.", false),
     NO_INTERACTIVE("There's no such object that you can interact with.", false),
     NO_OBJECT_ROOM("There's no object with that name in the room.", false),
-    OBJECT_MOVED("The object has been moved", true),
+    OBJECT_MOVED("The object has been moved.", true), ITEM_TAKEN("You have taken the item.", true),
+    ITEM_DROPPED("You have dropped the item.", true),
+    CHARACTER_TAKEN("You have brought a character into your party.", true),
+    CHARACTER_DROPPED("You have removed a character from your part.", true),
     NO_OBJECT_PARTY("There's no object with that name in the party.", false),
     IMMOVABLE("This object can't be moved.", false), NO_EFFECT("Interacting with this object had no effect.", false),
 

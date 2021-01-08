@@ -271,7 +271,7 @@ public class Game {
         henrikRoom.addItem(new Item("scissors", "a rusty pair of scissors"));
         henrikRoom.addItem(new Item("glass", "a piece of glass, be careful not to cut yourself"));
 
-        Player player = new Player("Alexander", "Beautiful");
+        Player player = new Player("Alexander", "You look determined to find your friends.");
         gameState = new GameState(player, entrance);
         victoryCondition = new VictoryCondition("You won the game!", gameState, characterList, entrance);
         loseCondition = new LoseCondition("You lost the game, too bad!", player);

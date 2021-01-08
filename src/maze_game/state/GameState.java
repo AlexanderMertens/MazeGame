@@ -125,9 +125,14 @@ public class GameState {
             return Flag.NO_ARGUMENT;
         }
 
-        Flag flag = player.takeItemFrom(currentRoom, objectName);
-        if (!flag.isSuccess()) {
-            flag = this.moveObjectFrom(currentRoom, objectName);
+        Flag flag;
+        flag = player.takeItemFrom(currentRoom, objectName);
+        if (flag.isSuccess()) {
+            return Flag.ITEM_TAKEN;
+        }
+        flag = this.moveObjectFrom(currentRoom, objectName);
+        if (flag.isSuccess()) {
+            return Flag.CHARACTER_TAKEN;
         }
         return flag;
     }
@@ -146,9 +151,18 @@ public class GameState {
      *         wrong.
      */
     public Flag playerDrops(String objectName) {
-        Flag flag = player.giveItemTo(currentRoom, objectName);
-        if (!flag.isSuccess()) {
-            flag = moveObjectTo(currentRoom, objectName);
+        if (objectName == null) {
+            return Flag.NO_ARGUMENT;
+        }
+
+        Flag flag;
+        flag = player.giveItemTo(currentRoom, objectName);
+        if (flag.isSuccess()) {
+            return Flag.ITEM_DROPPED;
+        }
+        flag = moveObjectTo(currentRoom, objectName);
+        if (flag.isSuccess()) {
+            return Flag.CHARACTER_DROPPED;
         }
         return flag;
     }
