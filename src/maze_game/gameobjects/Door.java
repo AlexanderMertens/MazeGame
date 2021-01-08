@@ -9,7 +9,7 @@ package maze_game.gameobjects;
  */
 public class Door extends GameObject {
 
-    private Room room;
+    private final Room room;
 
     /**
      * Constructs a Door with given name and description leading to the given room.

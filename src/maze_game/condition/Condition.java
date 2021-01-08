@@ -5,7 +5,7 @@ package maze_game.condition;
  * holds a message to be printed when the condition is satisfied.
  */
 public abstract class Condition {
-    private String message;
+    private final String message;
 
     public Condition(String message) {
         this.message = message;

@@ -31,7 +31,7 @@ public class GameState {
     // The player can interact with these via the interact command
     private GameObjectMapByName<InteractiveObject> objects;
     // Holds hints for the player
-    private Hints hints;
+    private final Hints hints;
 
     /**
      * Creates a new GameState with given player and currentRoom.

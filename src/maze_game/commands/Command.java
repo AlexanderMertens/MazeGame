@@ -12,7 +12,7 @@ import maze_game.state.GameState;
  * @author Alexander Mertens
  */
 public abstract class Command {
-    private String argument;
+    private final String argument;
 
     /**
      * Create a command object.

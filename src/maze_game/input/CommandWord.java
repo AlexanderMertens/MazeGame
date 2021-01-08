@@ -10,7 +10,7 @@ public enum CommandWord {
     GO("go"), TAKE("take"), DROP("drop"), BACK("back"), LOOK("look"), OPEN("open"), INTERACT("interact"), QUIT("quit"),
     HELP("help"), HINT("hint"), UNKNOWN("?");
 
-    private String commandString;
+    private final String commandString;
 
     /**
      * Constructs a CommandWord with the given commandString.

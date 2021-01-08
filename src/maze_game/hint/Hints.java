@@ -8,7 +8,7 @@ package maze_game.hint;
  * the hints.
  */
 public class Hints {
-    private static String[] hints = new String[] { "You can look at doors by entering 'look <direction>'."
+    private static final String[] hints = new String[] { "You can look at doors by entering 'look <direction>'."
             + "\nLooking at locked doors gives you an idea of what their key might be, then use 'open <direction>' once you find it.",
             "The puzzle in the rooms require you to interact with the mechanisms in the correct order."
                     + "\nIf you get the order wrong, the puzzle resets.",

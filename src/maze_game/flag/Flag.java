@@ -34,8 +34,8 @@ public enum Flag {
     // back
     NO_HISTORY("You do not have any previously visited locations.", false);
 
-    private String message;
-    private boolean success;
+    private final String message;
+    private final boolean success;
 
     /**
      * Constructs a Flag with the given message.

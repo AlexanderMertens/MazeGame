@@ -33,7 +33,7 @@ public enum Direction {
         }
     };
 
-    private String directionString;
+    private final String directionString;
 
     /**
      * Constructs a Direction object with the given directionString, a String
